@@ -1,0 +1,10 @@
+C:\Users\zengjieliang\Documents\GitHub\XXXbox\VideoBox\VideoBox\bin\Release\VideoBox.exe.config
+C:\Users\zengjieliang\Documents\GitHub\XXXbox\VideoBox\VideoBox\bin\Release\VideoBox.exe
+C:\Users\zengjieliang\Documents\GitHub\XXXbox\VideoBox\VideoBox\bin\Release\VideoBox.pdb
+C:\Users\zengjieliang\Documents\GitHub\XXXbox\VideoBox\VideoBox\obj\Release\VideoBox.csprojAssemblyReference.cache
+C:\Users\zengjieliang\Documents\GitHub\XXXbox\VideoBox\VideoBox\obj\Release\VideoBox.Form1.resources
+C:\Users\zengjieliang\Documents\GitHub\XXXbox\VideoBox\VideoBox\obj\Release\VideoBox.Properties.Resources.resources
+C:\Users\zengjieliang\Documents\GitHub\XXXbox\VideoBox\VideoBox\obj\Release\VideoBox.csproj.GenerateResource.cache
+C:\Users\zengjieliang\Documents\GitHub\XXXbox\VideoBox\VideoBox\obj\Release\VideoBox.csproj.CoreCompileInputs.cache
+C:\Users\zengjieliang\Documents\GitHub\XXXbox\VideoBox\VideoBox\obj\Release\VideoBox.exe
+C:\Users\zengjieliang\Documents\GitHub\XXXbox\VideoBox\VideoBox\obj\Release\VideoBox.pdb
