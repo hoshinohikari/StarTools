@@ -22,6 +22,9 @@ namespace VideoBox
         private void Form1_Load(object sender, EventArgs e)
         {
             OutputFile.ReadOnly = true;
+            AssFile.ReadOnly = true;
+            AssFile.Text = "目前仅支持NVEnc";
+            EncoderBox.SelectedIndex = 0;
         }
 
         private void AddFiles1_Click(object sender, EventArgs e)
@@ -96,33 +99,79 @@ namespace VideoBox
 
         private void rip_Click(object sender, EventArgs e)
         {
-            if (AssFile.Text == "")
-            {
-                Process p = new Process();
-                p.StartInfo.FileName = "cmd.exe";
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.RedirectStandardInput = true;
-                p.StartInfo.RedirectStandardOutput = false;
-                p.StartInfo.RedirectStandardError = false;
-                p.StartInfo.CreateNoWindow = false;
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.RedirectStandardOutput = false;
+            p.StartInfo.RedirectStandardError = false;
+            p.StartInfo.CreateNoWindow = false;
 
-                p.Start();
-                p.StandardInput.WriteLine("tool\\NVEncC64.exe --avhw -i \"" + VideoFile.Text + "\" --audio-codec 1?aac -o \"" + OutputFile.Text + "\"");
-            }
-            else
+            switch (EncoderBox.SelectedIndex)
             {
-                Process p = new Process();
-                p.StartInfo.FileName = "cmd.exe";
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.RedirectStandardInput = true;
-                p.StartInfo.RedirectStandardOutput = false;
-                p.StartInfo.RedirectStandardError = false;
-                p.StartInfo.CreateNoWindow = false;
-
-                p.Start();
-                p.StandardInput.WriteLine("tool\\NVEncC64.exe --avhw -i \"" + VideoFile.Text + "\" --audio-codec 1?aac --vpp-subburn filename=\"" +
-                                          AssFile.Text+"\" -o \"" + OutputFile.Text + "\"");
+                case 0:
+                    p.Start();
+                    p.StandardInput.WriteLine("tool\\QSVEnc\\QSVEncC64.exe --avhw -i \"" + VideoFile.Text + "\" --audio-codec 1?aac -o \"" + OutputFile.Text + "\"");
+                    break;
+                case 1:
+                    if (AssFile.Text == "")
+                    {
+                        p.Start();
+                        p.StandardInput.WriteLine("tool\\NVEnc\\NVEncC64.exe --avhw -i \"" + VideoFile.Text + "\" --audio-codec 1?aac -o \"" + OutputFile.Text + "\"");
+                    }
+                    else
+                    {
+                        p.Start();
+                        p.StandardInput.WriteLine("tool\\NVEnc\\NVEncC64.exe --avhw -i \"" + VideoFile.Text + "\" --audio-codec 1?aac --vpp-subburn filename=\"" +
+                                                  AssFile.Text + "\" -o \"" + OutputFile.Text + "\"");
+                    }
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                default:
+                    MessageBox.Show("Error!");
+                    break;
             }
+        }
+
+        private void Backout_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void EncoderBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (EncoderBox.SelectedIndex)
+            {
+                case 0:
+                    AssFile.ReadOnly = true;
+                    AssFile.Text = "目前仅支持NVEnc";
+                    break;
+                case 1:
+                    AssFile.ReadOnly = false;
+                    AssFile.Text = "";
+                    break;
+                case 2:
+                    AssFile.ReadOnly = true;
+                    AssFile.Text = "目前仅支持NVEnc";
+                    break;
+                case 3:
+                    AssFile.ReadOnly = true;
+                    AssFile.Text = "目前仅支持NVEnc";
+                    break;
+                default:
+                    MessageBox.Show("Error!");
+                    break;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form2 f = new Form2();
+
+            f.ShowDialog();
         }
     }
 }

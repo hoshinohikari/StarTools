@@ -1,2 +1,3 @@
-VideoBox/.vs/
-VideoBox/VideoBox/bin/
+/VideoBox/.vs/
+/VideoBox/VideoBox/bin/
+/VideoBox/VideoBox/obj/

@@ -39,6 +39,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.rip = new System.Windows.Forms.Button();
             this.Backout = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.EncoderBox = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // VideoFile
@@ -121,7 +124,7 @@
             // 
             // rip
             // 
-            this.rip.Location = new System.Drawing.Point(148, 188);
+            this.rip.Location = new System.Drawing.Point(157, 224);
             this.rip.Name = "rip";
             this.rip.Size = new System.Drawing.Size(75, 21);
             this.rip.TabIndex = 9;
@@ -131,18 +134,55 @@
             // 
             // Backout
             // 
-            this.Backout.Location = new System.Drawing.Point(432, 188);
+            this.Backout.Location = new System.Drawing.Point(441, 224);
             this.Backout.Name = "Backout";
             this.Backout.Size = new System.Drawing.Size(75, 21);
             this.Backout.TabIndex = 10;
             this.Backout.Text = "退出";
             this.Backout.UseVisualStyleBackColor = true;
+            this.Backout.Click += new System.EventHandler(this.Backout_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(34, 175);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "选择编码器";
+            // 
+            // EncoderBox
+            // 
+            this.EncoderBox.FormattingEnabled = true;
+            this.EncoderBox.Items.AddRange(new object[] {
+            "QSVEnc（Intel显卡以及笔记本集显用）（推荐）（默认）",
+            "NVEnc（nVidia显卡用）",
+            "VCEEnc（AMD显卡以及笔记本集显用）",
+            "x264（CPU压制，慢，兼容性、效果最好）"});
+            this.EncoderBox.Location = new System.Drawing.Point(105, 172);
+            this.EncoderBox.Name = "EncoderBox";
+            this.EncoderBox.Size = new System.Drawing.Size(420, 20);
+            this.EncoderBox.TabIndex = 12;
+            this.EncoderBox.SelectedIndexChanged += new System.EventHandler(this.EncoderBox_SelectedIndexChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(531, 172);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 21);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "编码器设置";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 249);
+            this.ClientSize = new System.Drawing.Size(659, 279);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.EncoderBox);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.Backout);
             this.Controls.Add(this.rip);
             this.Controls.Add(this.label3);
@@ -176,6 +216,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button rip;
         private System.Windows.Forms.Button Backout;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox EncoderBox;
+        private System.Windows.Forms.Button button1;
     }
 }
 
