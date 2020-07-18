@@ -1,6 +1,6 @@
 ﻿namespace VideoBox
 {
-    partial class Form1
+    partial class MainBox
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -163,7 +163,6 @@
             this.EncoderBox.Name = "EncoderBox";
             this.EncoderBox.Size = new System.Drawing.Size(420, 20);
             this.EncoderBox.TabIndex = 12;
-            this.EncoderBox.SelectedIndexChanged += new System.EventHandler(this.EncoderBox_SelectedIndexChanged);
             // 
             // button1
             // 
@@ -175,7 +174,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // MainBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -195,8 +194,8 @@
             this.Controls.Add(this.AddFiles1);
             this.Controls.Add(this.VideoFile);
             this.MaximizeBox = false;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainBox";
+            this.Text = "MainBox";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
