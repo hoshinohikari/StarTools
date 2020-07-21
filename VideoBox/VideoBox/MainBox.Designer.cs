@@ -42,6 +42,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.EncoderBox = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.hBox = new System.Windows.Forms.TextBox();
+            this.wBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // VideoFile
@@ -124,7 +129,7 @@
             // 
             // rip
             // 
-            this.rip.Location = new System.Drawing.Point(157, 224);
+            this.rip.Location = new System.Drawing.Point(153, 254);
             this.rip.Name = "rip";
             this.rip.Size = new System.Drawing.Size(75, 21);
             this.rip.TabIndex = 9;
@@ -134,7 +139,7 @@
             // 
             // Backout
             // 
-            this.Backout.Location = new System.Drawing.Point(441, 224);
+            this.Backout.Location = new System.Drawing.Point(437, 254);
             this.Backout.Name = "Backout";
             this.Backout.Size = new System.Drawing.Size(75, 21);
             this.Backout.TabIndex = 10;
@@ -157,8 +162,7 @@
             this.EncoderBox.Items.AddRange(new object[] {
             "QSVEnc（Intel显卡以及笔记本集显用）（推荐）（默认）",
             "NVEnc（nVidia显卡用）",
-            "VCEEnc（AMD显卡以及笔记本集显用）",
-            "x264（CPU压制，慢，兼容性、效果最好）"});
+            "VCEEnc（AMD显卡以及笔记本集显用）"});
             this.EncoderBox.Location = new System.Drawing.Point(105, 172);
             this.EncoderBox.Name = "EncoderBox";
             this.EncoderBox.Size = new System.Drawing.Size(420, 20);
@@ -174,11 +178,59 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(105, 216);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(84, 16);
+            this.checkBox1.TabIndex = 14;
+            this.checkBox1.Text = "硬件反交错";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(216, 216);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(72, 16);
+            this.checkBox2.TabIndex = 15;
+            this.checkBox2.Text = "硬件缩放";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // hBox
+            // 
+            this.hBox.Location = new System.Drawing.Point(369, 214);
+            this.hBox.Name = "hBox";
+            this.hBox.Size = new System.Drawing.Size(52, 21);
+            this.hBox.TabIndex = 16;
+            // 
+            // wBox
+            // 
+            this.wBox.Location = new System.Drawing.Point(294, 214);
+            this.wBox.Name = "wBox";
+            this.wBox.Size = new System.Drawing.Size(52, 21);
+            this.wBox.TabIndex = 17;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(352, 220);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(11, 12);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "X";
+            // 
             // MainBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 279);
+            this.ClientSize = new System.Drawing.Size(659, 292);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.wBox);
+            this.Controls.Add(this.hBox);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.EncoderBox);
             this.Controls.Add(this.label4);
@@ -218,6 +270,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox EncoderBox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.TextBox hBox;
+        private System.Windows.Forms.TextBox wBox;
+        private System.Windows.Forms.Label label5;
     }
 }
 

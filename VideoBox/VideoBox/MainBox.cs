@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -24,6 +25,8 @@ namespace VideoBox
         {
             OutputFile.ReadOnly = true;
             EncoderBox.SelectedIndex = 0;
+            wBox.Text = "1280";
+            hBox.Text = "720";
         }
 
         private void AddFiles1_Click(object sender, EventArgs e)
@@ -100,6 +103,7 @@ namespace VideoBox
         {
             Process p = new Process();
             string cmdLine="";
+            var appSettings = ConfigurationManager.AppSettings;
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardInput = true;
@@ -182,40 +186,38 @@ namespace VideoBox
 
             try
             {
-                List<string> lines = new List<string>(File.ReadAllLines(@"setting\EncoderSetting.cfg"));
-
-                if (lines.Count >= 1)
+                string result = appSettings["Code_rate_control_mode_selection"] ?? "Not Found";
+                switch (result)
                 {
-                    string temp = !string.IsNullOrWhiteSpace(lines[0]) && lines[0].Length >= 32
-                        ? lines[0].Substring(0, 32)
-                        : lines[0];
-                    if (temp == "Code_rate_control_mode_selection")
-                    {
-                        switch (lines[0][33])
-                        {
-                            case '1':
-                                cmdLine = cmdLine + " --cqp " +
-                                          lines[1].Substring(lines[1].IndexOf("=") + 1,
-                                              lines[1].IndexOf(";") - lines[1].IndexOf("=") - 1);
-                                break;
-                            case '2':
-                                cmdLine = cmdLine + " --cbr " +
-                                          lines[1].Substring(lines[1].IndexOf("=", 15) + 1,
-                                              lines[1].IndexOf(";", 21) - lines[1].IndexOf("=", 15) - 1);
-                                break;
-                            case '3':
-                                cmdLine = cmdLine + " --vbr " +
-                                          lines[1].Substring(lines[1].IndexOf("=", 24) + 1,
-                                              lines[1].IndexOf(";", 30) - lines[1].IndexOf("=", 24) - 1);
-                                break;
-                        }
-                    }
+                    case "1":
+                        cmdLine = cmdLine + " --cqp " + appSettings["I"] + ":" + appSettings["P"] + ":" + appSettings["B"];
+                        break;
+                    case "2":
+                        cmdLine = cmdLine + " --cbr " + appSettings["CBR"];
+                        break;
+                    case "3":
+                        cmdLine = cmdLine + " --vbr " + appSettings["VBR"];
+                        break;
+                    case "Not Found":
+                        MessageBox.Show("设置出现问题，请重新进入编码器设置并保存");
+                        break;
                 }
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
                 throw;
+            }
+
+            if (checkBox1.Checked)
+                cmdLine = cmdLine + " --interlace tff --vpp-deinterlace normal";
+
+            if (checkBox2.Checked)
+                cmdLine = cmdLine + " --output-res " + wBox.Text + "x" + hBox.Text;
+
+            if (appSettings["Code"] != null && appSettings["Code"] != "")
+            {
+                cmdLine = cmdLine + appSettings["Code"];
             }
 
             cmdLine = cmdLine + " -o \"" + OutputFile.Text + "\"";

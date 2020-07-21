@@ -44,9 +44,9 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.codeBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.FinBox = new System.Windows.Forms.TextBox();
             this.Save = new System.Windows.Forms.Button();
             this.Backout = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
@@ -111,6 +111,7 @@
             this.CBRBox.Name = "CBRBox";
             this.CBRBox.Size = new System.Drawing.Size(50, 21);
             this.CBRBox.TabIndex = 13;
+            this.CBRBox.TextChanged += new System.EventHandler(this.Box_TextChanged);
             // 
             // VBRBox
             // 
@@ -118,6 +119,7 @@
             this.VBRBox.Name = "VBRBox";
             this.VBRBox.Size = new System.Drawing.Size(50, 21);
             this.VBRBox.TabIndex = 12;
+            this.VBRBox.TextChanged += new System.EventHandler(this.Box_TextChanged);
             // 
             // label3
             // 
@@ -152,6 +154,7 @@
             this.PBox.Name = "PBox";
             this.PBox.Size = new System.Drawing.Size(50, 21);
             this.PBox.TabIndex = 8;
+            this.PBox.TextChanged += new System.EventHandler(this.Box_TextChanged);
             // 
             // BBox
             // 
@@ -159,6 +162,7 @@
             this.BBox.Name = "BBox";
             this.BBox.Size = new System.Drawing.Size(50, 21);
             this.BBox.TabIndex = 7;
+            this.BBox.TextChanged += new System.EventHandler(this.Box_TextChanged);
             // 
             // IBox
             // 
@@ -166,6 +170,7 @@
             this.IBox.Name = "IBox";
             this.IBox.Size = new System.Drawing.Size(50, 21);
             this.IBox.TabIndex = 6;
+            this.IBox.TextChanged += new System.EventHandler(this.Box_TextChanged);
             // 
             // radioButton3
             // 
@@ -176,6 +181,7 @@
             this.radioButton3.TabIndex = 5;
             this.radioButton3.Text = "vbr(可变比特率)";
             this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // radioButton2
             // 
@@ -186,6 +192,7 @@
             this.radioButton2.TabIndex = 4;
             this.radioButton2.Text = "cbr(固定比特率)";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // radioButton1
             // 
@@ -198,11 +205,12 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "cqp(默认模式，设置值越高文件越小，后面的值越低动态越不容易模糊)";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.Controls.Add(this.textBox6);
+            this.tabPage2.Controls.Add(this.codeBox);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -211,13 +219,14 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "高级";
             // 
-            // textBox6
+            // codeBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(18, 29);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(275, 140);
-            this.textBox6.TabIndex = 16;
+            this.codeBox.Location = new System.Drawing.Point(18, 29);
+            this.codeBox.Multiline = true;
+            this.codeBox.Name = "codeBox";
+            this.codeBox.Size = new System.Drawing.Size(275, 140);
+            this.codeBox.TabIndex = 16;
+            this.codeBox.TextChanged += new System.EventHandler(this.Box_TextChanged);
             // 
             // label6
             // 
@@ -228,14 +237,14 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "自定义命令行";
             // 
-            // textBox7
+            // FinBox
             // 
-            this.textBox7.Location = new System.Drawing.Point(16, 237);
-            this.textBox7.Multiline = true;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(319, 167);
-            this.textBox7.TabIndex = 17;
+            this.FinBox.Location = new System.Drawing.Point(16, 237);
+            this.FinBox.Multiline = true;
+            this.FinBox.Name = "FinBox";
+            this.FinBox.ReadOnly = true;
+            this.FinBox.Size = new System.Drawing.Size(319, 167);
+            this.FinBox.TabIndex = 17;
             // 
             // Save
             // 
@@ -265,7 +274,7 @@
             this.ClientSize = new System.Drawing.Size(351, 450);
             this.Controls.Add(this.Backout);
             this.Controls.Add(this.Save);
-            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.FinBox);
             this.Controls.Add(this.tabControl1);
             this.Name = "EncoderSetting";
             this.Text = "EncoderBox";
@@ -298,9 +307,9 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox codeBox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox FinBox;
         private System.Windows.Forms.Button Save;
         private System.Windows.Forms.Button Backout;
     }
