@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{53841EE9-2AEA-4111-B28C-CEAB47FADD53}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>VideoBox</RootNamespace>
-    <AssemblyName>VideoBox</AssemblyName>
+    <RootNamespace>StarTools</RootNamespace>
+    <AssemblyName>StarTools</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,10 +32,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>StarTools.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,11 +52,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainBox.cs">
+    <Compile Include="ffmpeg_Live.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainBox.Designer.cs">
-      <DependentUpon>MainBox.cs</DependentUpon>
+    <Compile Include="ffmpeg_Live.Designer.cs">
+      <DependentUpon>ffmpeg_Live.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StarTools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StarTools.Designer.cs">
+      <DependentUpon>StarTools.cs</DependentUpon>
     </Compile>
     <Compile Include="EncoderBox.cs">
       <SubType>Form</SubType>
@@ -61,8 +72,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainBox.resx">
-      <DependentUpon>MainBox.cs</DependentUpon>
+    <EmbeddedResource Include="ffmpeg_Live.resx">
+      <DependentUpon>ffmpeg_Live.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StarTools.resx">
+      <DependentUpon>StarTools.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EncoderBox.resx">
       <DependentUpon>EncoderBox.cs</DependentUpon>
@@ -75,6 +89,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -88,6 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="StarTools.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

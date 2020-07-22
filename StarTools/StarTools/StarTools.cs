@@ -237,5 +237,12 @@ namespace VideoBox
 
             f.ShowDialog();
         }
+
+        private void ffmpeg直播ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ffmpeg_Live f = new ffmpeg_Live();
+
+            f.ShowDialog();
+        }
     }
 }

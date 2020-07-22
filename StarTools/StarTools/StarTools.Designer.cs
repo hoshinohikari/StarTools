@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainBox));
             this.VideoFile = new System.Windows.Forms.TextBox();
             this.AddFiles1 = new System.Windows.Forms.Button();
             this.AddFiles2 = new System.Windows.Forms.Button();
@@ -47,18 +48,22 @@
             this.hBox = new System.Windows.Forms.TextBox();
             this.wBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ffmpeg常用功能ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ffmpeg直播ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // VideoFile
             // 
-            this.VideoFile.Location = new System.Drawing.Point(105, 49);
+            this.VideoFile.Location = new System.Drawing.Point(108, 41);
             this.VideoFile.Name = "VideoFile";
             this.VideoFile.Size = new System.Drawing.Size(420, 21);
             this.VideoFile.TabIndex = 0;
             // 
             // AddFiles1
             // 
-            this.AddFiles1.Location = new System.Drawing.Point(531, 49);
+            this.AddFiles1.Location = new System.Drawing.Point(534, 41);
             this.AddFiles1.Name = "AddFiles1";
             this.AddFiles1.Size = new System.Drawing.Size(75, 21);
             this.AddFiles1.TabIndex = 1;
@@ -68,7 +73,7 @@
             // 
             // AddFiles2
             // 
-            this.AddFiles2.Location = new System.Drawing.Point(531, 89);
+            this.AddFiles2.Location = new System.Drawing.Point(534, 81);
             this.AddFiles2.Name = "AddFiles2";
             this.AddFiles2.Size = new System.Drawing.Size(75, 21);
             this.AddFiles2.TabIndex = 3;
@@ -78,14 +83,14 @@
             // 
             // AssFile
             // 
-            this.AssFile.Location = new System.Drawing.Point(105, 89);
+            this.AssFile.Location = new System.Drawing.Point(108, 81);
             this.AssFile.Name = "AssFile";
             this.AssFile.Size = new System.Drawing.Size(420, 21);
             this.AssFile.TabIndex = 2;
             // 
             // SaveFiles
             // 
-            this.SaveFiles.Location = new System.Drawing.Point(531, 129);
+            this.SaveFiles.Location = new System.Drawing.Point(534, 121);
             this.SaveFiles.Name = "SaveFiles";
             this.SaveFiles.Size = new System.Drawing.Size(75, 21);
             this.SaveFiles.TabIndex = 5;
@@ -95,7 +100,7 @@
             // 
             // OutputFile
             // 
-            this.OutputFile.Location = new System.Drawing.Point(105, 129);
+            this.OutputFile.Location = new System.Drawing.Point(108, 121);
             this.OutputFile.Name = "OutputFile";
             this.OutputFile.Size = new System.Drawing.Size(420, 21);
             this.OutputFile.TabIndex = 4;
@@ -103,7 +108,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(46, 52);
+            this.label1.Location = new System.Drawing.Point(49, 44);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 6;
@@ -112,7 +117,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(46, 93);
+            this.label2.Location = new System.Drawing.Point(49, 85);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 7;
@@ -121,7 +126,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(58, 132);
+            this.label3.Location = new System.Drawing.Point(61, 124);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 8;
@@ -129,7 +134,7 @@
             // 
             // rip
             // 
-            this.rip.Location = new System.Drawing.Point(153, 254);
+            this.rip.Location = new System.Drawing.Point(156, 246);
             this.rip.Name = "rip";
             this.rip.Size = new System.Drawing.Size(75, 21);
             this.rip.TabIndex = 9;
@@ -139,7 +144,7 @@
             // 
             // Backout
             // 
-            this.Backout.Location = new System.Drawing.Point(437, 254);
+            this.Backout.Location = new System.Drawing.Point(440, 246);
             this.Backout.Name = "Backout";
             this.Backout.Size = new System.Drawing.Size(75, 21);
             this.Backout.TabIndex = 10;
@@ -150,7 +155,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(34, 175);
+            this.label4.Location = new System.Drawing.Point(37, 167);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 11;
@@ -163,14 +168,14 @@
             "QSVEnc（Intel显卡以及笔记本集显用）（推荐）（默认）",
             "NVEnc（nVidia显卡用）",
             "VCEEnc（AMD显卡以及笔记本集显用）"});
-            this.EncoderBox.Location = new System.Drawing.Point(105, 172);
+            this.EncoderBox.Location = new System.Drawing.Point(108, 164);
             this.EncoderBox.Name = "EncoderBox";
             this.EncoderBox.Size = new System.Drawing.Size(420, 20);
             this.EncoderBox.TabIndex = 12;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(531, 172);
+            this.button1.Location = new System.Drawing.Point(534, 164);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 21);
             this.button1.TabIndex = 13;
@@ -181,7 +186,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(105, 216);
+            this.checkBox1.Location = new System.Drawing.Point(108, 208);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(84, 16);
             this.checkBox1.TabIndex = 14;
@@ -191,7 +196,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(216, 216);
+            this.checkBox2.Location = new System.Drawing.Point(219, 208);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(72, 16);
             this.checkBox2.TabIndex = 15;
@@ -200,14 +205,14 @@
             // 
             // hBox
             // 
-            this.hBox.Location = new System.Drawing.Point(369, 214);
+            this.hBox.Location = new System.Drawing.Point(372, 206);
             this.hBox.Name = "hBox";
             this.hBox.Size = new System.Drawing.Size(52, 21);
             this.hBox.TabIndex = 16;
             // 
             // wBox
             // 
-            this.wBox.Location = new System.Drawing.Point(294, 214);
+            this.wBox.Location = new System.Drawing.Point(297, 206);
             this.wBox.Name = "wBox";
             this.wBox.Size = new System.Drawing.Size(52, 21);
             this.wBox.TabIndex = 17;
@@ -215,17 +220,42 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(352, 220);
+            this.label5.Location = new System.Drawing.Point(355, 212);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(11, 12);
             this.label5.TabIndex = 18;
             this.label5.Text = "X";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ffmpeg常用功能ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(659, 25);
+            this.menuStrip1.TabIndex = 19;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // ffmpeg常用功能ToolStripMenuItem
+            // 
+            this.ffmpeg常用功能ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ffmpeg直播ToolStripMenuItem});
+            this.ffmpeg常用功能ToolStripMenuItem.Name = "ffmpeg常用功能ToolStripMenuItem";
+            this.ffmpeg常用功能ToolStripMenuItem.Size = new System.Drawing.Size(110, 21);
+            this.ffmpeg常用功能ToolStripMenuItem.Text = "ffmpeg常用功能";
+            // 
+            // ffmpeg直播ToolStripMenuItem
+            // 
+            this.ffmpeg直播ToolStripMenuItem.Name = "ffmpeg直播ToolStripMenuItem";
+            this.ffmpeg直播ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.ffmpeg直播ToolStripMenuItem.Text = "ffmpeg直播";
+            this.ffmpeg直播ToolStripMenuItem.Click += new System.EventHandler(this.ffmpeg直播ToolStripMenuItem_Click);
+            // 
             // MainBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 292);
+            this.ClientSize = new System.Drawing.Size(659, 281);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.wBox);
             this.Controls.Add(this.hBox);
@@ -245,10 +275,15 @@
             this.Controls.Add(this.AssFile);
             this.Controls.Add(this.AddFiles1);
             this.Controls.Add(this.VideoFile);
+            this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainBox";
-            this.Text = "MainBox";
+            this.Text = "StarTools";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,6 +310,9 @@
         private System.Windows.Forms.TextBox hBox;
         private System.Windows.Forms.TextBox wBox;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ffmpeg常用功能ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ffmpeg直播ToolStripMenuItem;
     }
 }
 
