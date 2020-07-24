@@ -25,6 +25,11 @@ namespace VideoBox
         {
             OutputFile.ReadOnly = true;
             EncoderBox.SelectedIndex = 0;
+            comboBox1.SelectedIndex = 0;
+            AudioBox.Hide();
+            label7.Hide();
+            label8.Show();
+            AudioBox.Text = "192";
             wBox.Text = "1280";
             hBox.Text = "720";
         }
@@ -131,7 +136,7 @@ namespace VideoBox
                 temp = temp.Insert(temp.IndexOf(":"), "\\\\");
                 if (EncoderBox.SelectedIndex == 1)
                 {
-                    cmdLine = "tool\\NVEnc\\NVEncC64.exe --avhw -i \"" + VideoFile.Text +
+                    cmdLine = "tool\\HardEnc\\NVEncC64.exe --avhw -i \"" + VideoFile.Text +
                               "\" --audio-codec 1?aac --vpp-subburn filename=\"" +
                               AssFile.Text + "\"";
                 }
@@ -142,7 +147,7 @@ namespace VideoBox
                         case 0:
                             cmdLine = "tool\\ffmpeg\\ffmpeg.exe -y -i \"" + VideoFile.Text +
                                       "\" -vf \"ass=" + temp +
-                                      "\" -codec:a copy -codec:v rawvideo -pix_fmt yuv420p -f nut - | tool\\QSVEnc\\QSVEncC64.exe --avsw -i - --audio-codec 1?aac";
+                                      "\" -codec:a copy -codec:v rawvideo -pix_fmt yuv420p -f nut - | tool\\HardEnc\\QSVEncC64.exe --avsw -i -";
                             break;
                         case 1:
                             MessageBox.Show("Error!");
@@ -150,7 +155,7 @@ namespace VideoBox
                         case 2:
                             cmdLine = "tool\\ffmpeg\\ffmpeg.exe -y -i \"" + VideoFile.Text +
                                       "\" -vf \"ass=" + temp +
-                                      "\" -codec:a copy -codec:v rawvideo -pix_fmt yuv420p -f nut - | tool\\VCEEnc\\VCEEncC64.exe --avsw -i - --audio-codec 1?aac";
+                                      "\" -codec:a copy -codec:v rawvideo -pix_fmt yuv420p -f nut - | tool\\HardEnc\\VCEEncC64.exe --avsw -i -";
                             break;
                         case 3:
                             break;
@@ -165,16 +170,16 @@ namespace VideoBox
                 switch (EncoderBox.SelectedIndex)
                 {
                     case 0:
-                        cmdLine = "tool\\QSVEnc\\QSVEncC64.exe --avhw -i \"" + VideoFile.Text +
-                                  "\" --audio-codec 1?aac";
+                        cmdLine = "tool\\HardEnc\\QSVEncC64.exe --avhw -i \"" + VideoFile.Text +
+                                  "\"";
                         break;
                     case 1:
-                        cmdLine = "tool\\NVEnc\\NVEncC64.exe --avhw -i \"" + VideoFile.Text +
-                                  "\" --audio-codec 1?aac";
+                        cmdLine = "tool\\HardEnc\\NVEncC64.exe --avhw -i \"" + VideoFile.Text +
+                                  "\"";
                         break;
                     case 2:
-                        cmdLine = "tool\\VCEEnc\\VCEEncC64.exe --avhw -i \"" + VideoFile.Text +
-                                  "\" --audio-codec 1?aac";
+                        cmdLine = "tool\\HardEnc\\VCEEncC64.exe --avhw -i \"" + VideoFile.Text +
+                                  "\"";
                         break;
                     case 3:
                         break;
@@ -182,6 +187,16 @@ namespace VideoBox
                         MessageBox.Show("Error!");
                         break;
                 }
+            }
+
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0:
+                    cmdLine = cmdLine + " --audio-copy";
+                    break;
+                case 1:
+                    cmdLine = cmdLine + " --audio-codec 1?aac --audio-bitrate " + AudioBox.Text;
+                    break;
             }
 
             try
@@ -238,11 +253,41 @@ namespace VideoBox
             f.ShowDialog();
         }
 
-        private void ffmpeg直播ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ffmpeg_Live_Click(object sender, EventArgs e)
         {
             ffmpeg_Live f = new ffmpeg_Live();
 
             f.ShowDialog();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0:
+                    AudioBox.Hide();
+                    label7.Hide();
+                    label8.Show();
+                    break;
+                case 1:
+                    AudioBox.Show();
+                    label7.Show();
+                    label8.Hide();
+                    break;
+            }
+        }
+
+        private void VideoFile_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                OutputFile.Text = VideoFile.Text.Insert(VideoFile.Text.LastIndexOf("."), "_rip");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
         }
     }
 }

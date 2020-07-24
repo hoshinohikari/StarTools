@@ -50,7 +50,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ffmpeg常用功能ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ffmpeg直播ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ffmpeg_Live = new System.Windows.Forms.ToolStripMenuItem();
+            this.label6 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.AudioBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,6 +65,7 @@
             this.VideoFile.Name = "VideoFile";
             this.VideoFile.Size = new System.Drawing.Size(420, 21);
             this.VideoFile.TabIndex = 0;
+            this.VideoFile.TextChanged += new System.EventHandler(this.VideoFile_TextChanged);
             // 
             // AddFiles1
             // 
@@ -134,7 +140,7 @@
             // 
             // rip
             // 
-            this.rip.Location = new System.Drawing.Point(156, 246);
+            this.rip.Location = new System.Drawing.Point(152, 283);
             this.rip.Name = "rip";
             this.rip.Size = new System.Drawing.Size(75, 21);
             this.rip.TabIndex = 9;
@@ -144,7 +150,7 @@
             // 
             // Backout
             // 
-            this.Backout.Location = new System.Drawing.Point(440, 246);
+            this.Backout.Location = new System.Drawing.Point(436, 283);
             this.Backout.Name = "Backout";
             this.Backout.Size = new System.Drawing.Size(75, 21);
             this.Backout.TabIndex = 10;
@@ -239,23 +245,74 @@
             // ffmpeg常用功能ToolStripMenuItem
             // 
             this.ffmpeg常用功能ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ffmpeg直播ToolStripMenuItem});
+            this.ffmpeg_Live});
             this.ffmpeg常用功能ToolStripMenuItem.Name = "ffmpeg常用功能ToolStripMenuItem";
             this.ffmpeg常用功能ToolStripMenuItem.Size = new System.Drawing.Size(110, 21);
             this.ffmpeg常用功能ToolStripMenuItem.Text = "ffmpeg常用功能";
             // 
-            // ffmpeg直播ToolStripMenuItem
+            // ffmpeg_Live
             // 
-            this.ffmpeg直播ToolStripMenuItem.Name = "ffmpeg直播ToolStripMenuItem";
-            this.ffmpeg直播ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.ffmpeg直播ToolStripMenuItem.Text = "ffmpeg直播";
-            this.ffmpeg直播ToolStripMenuItem.Click += new System.EventHandler(this.ffmpeg直播ToolStripMenuItem_Click);
+            this.ffmpeg_Live.Name = "ffmpeg_Live";
+            this.ffmpeg_Live.Size = new System.Drawing.Size(180, 22);
+            this.ffmpeg_Live.Text = "ffmpeg直播";
+            this.ffmpeg_Live.Click += new System.EventHandler(this.ffmpeg_Live_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(106, 243);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "音频模式";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "复制音频",
+            "压制音频"});
+            this.comboBox1.Location = new System.Drawing.Point(165, 240);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(85, 20);
+            this.comboBox1.TabIndex = 21;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // AudioBox
+            // 
+            this.AudioBox.Location = new System.Drawing.Point(272, 240);
+            this.AudioBox.Name = "AudioBox";
+            this.AudioBox.Size = new System.Drawing.Size(52, 21);
+            this.AudioBox.TabIndex = 22;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(330, 243);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(29, 12);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "kbps";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(270, 243);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(149, 12);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "如报错请选择压制音频模式";
             // 
             // MainBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 281);
+            this.ClientSize = new System.Drawing.Size(659, 332);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.AudioBox);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.wBox);
             this.Controls.Add(this.hBox);
@@ -312,7 +369,12 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ffmpeg常用功能ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ffmpeg直播ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ffmpeg_Live;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox AudioBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
 

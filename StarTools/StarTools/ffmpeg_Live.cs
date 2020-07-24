@@ -14,6 +14,15 @@ namespace VideoBox
 {
     public partial class ffmpeg_Live : Form
     {
+        private void ffmpeg_Live_Load(object sender, EventArgs e)
+        {
+            comboBox1.SelectedIndex = 0;
+            AudioBox.Hide();
+            label7.Hide();
+            label8.Show();
+            AudioBox.Text = "192";
+        }
+
         public ffmpeg_Live()
         {
             InitializeComponent();
@@ -71,14 +80,42 @@ namespace VideoBox
             p.StartInfo.CreateNoWindow = false;
 
             p.Start();
-            p.StandardInput.WriteLine("tool\\ffmpeg\\ffmpeg.exe -re -i \"" + VideoFile.Text +
-                                      "\" -vcodec copy -acodec aac -b:a 192k -f flv \"" + RTMP.Text + LiveCode.Text +
-                                      "\"");
+            switch(comboBox1.SelectedIndex)
+            {
+                case 0:
+                    p.StandardInput.WriteLine("tool\\ffmpeg\\ffmpeg.exe -re -i \"" + VideoFile.Text +
+                                              "\" -vcodec copy -acodec copy -f flv \"" + RTMP.Text + LiveCode.Text +
+                                              "\"");
+                    break;
+                case 1:
+                    p.StandardInput.WriteLine("tool\\ffmpeg\\ffmpeg.exe -re -i \"" + VideoFile.Text +
+                                              "\" -vcodec copy -acodec aac -b:a " + AudioBox.Text + "k -f flv \"" +
+                                              RTMP.Text + LiveCode.Text +
+                                              "\"");
+                    break;
+            }
         }
 
         private void Backout_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0:
+                    AudioBox.Hide();
+                    label7.Hide();
+                    label8.Show();
+                    break;
+                case 1:
+                    AudioBox.Show();
+                    label7.Show();
+                    label8.Hide();
+                    break;
+            }
         }
     }
 }

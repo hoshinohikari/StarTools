@@ -1,8 +1,14 @@
-整合一个后期常用的小工具，包含显卡压制以及ffmpeg的常用功能，还有用于处理ASS文件和demux、remux一类的小工具  
-不保证更新效率  
-还没有取名  
+# StarTools
+
 ****
-目前进度：  
-完成显卡压制部分，已可以正常使用  
-ASS部分基于libass  
-缩放与反交错部分基于显卡内部硬件处理
+|Author|HoshinoKun|
+|---|---
+|E-mail|hoshinokun@346pro.club
+****
+
+[中文简介](/README_CN.md)
+## What's this?
+This is a GUI gadget based on FFmpeg, NVEnc, and other command line tools. It contains some commands that are commonly used in rip creation and daily use. If you have a feature you would like to add, please create issue or pull requests.
+
+### How to use
+Please download the latest installation package at [releases](https://github.com/hoshinohikari/StarTools/releases) and select the required encoder according to the chipset you are using. Then you can start using this.
