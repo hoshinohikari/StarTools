@@ -78,6 +78,8 @@
             this.VideoFile.Name = "VideoFile";
             this.VideoFile.Size = new System.Drawing.Size(339, 21);
             this.VideoFile.TabIndex = 10;
+            this.VideoFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.VideoFile_DragDrop);
+            this.VideoFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.VideoFile_DragEnter);
             // 
             // LiveCode
             // 
@@ -171,6 +173,7 @@
             // 
             // ffmpeg_Live
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(550, 260);
@@ -189,6 +192,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ffmpeg_Live";
             this.Text = "FFmpeg_live";
             this.Load += new System.EventHandler(this.ffmpeg_Live_Load);

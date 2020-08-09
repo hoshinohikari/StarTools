@@ -84,12 +84,14 @@ namespace VideoBox
             {
                 case 0:
                     p.StandardInput.WriteLine("tool\\ffmpeg\\ffmpeg.exe -re -i \"" + VideoFile.Text +
-                                              "\" -vcodec copy -acodec copy -f flv \"" + RTMP.Text + LiveCode.Text +
+                                              "\" -vcodec copy -acodec copy -f flv -flvflags no_duration_filesize \"" +
+                                              RTMP.Text + LiveCode.Text +
                                               "\"");
                     break;
                 case 1:
                     p.StandardInput.WriteLine("tool\\ffmpeg\\ffmpeg.exe -re -i \"" + VideoFile.Text +
-                                              "\" -vcodec copy -acodec aac -b:a " + AudioBox.Text + "k -f flv \"" +
+                                              "\" -vcodec copy -acodec aac -b:a " + AudioBox.Text +
+                                              "k -f flv -flvflags no_duration_filesize \"" +
                                               RTMP.Text + LiveCode.Text +
                                               "\"");
                     break;
@@ -116,6 +118,24 @@ namespace VideoBox
                     label8.Hide();
                     break;
             }
+        }
+
+        private void VideoFile_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void VideoFile_DragDrop(object sender, DragEventArgs e)
+        {
+            VideoFile.Text = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
         }
     }
 }

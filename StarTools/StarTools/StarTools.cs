@@ -281,12 +281,48 @@ namespace VideoBox
         {
             try
             {
-                OutputFile.Text = VideoFile.Text.Insert(VideoFile.Text.LastIndexOf("."), "_rip");
+                OutputFile.Text = VideoFile.Text.Substring(0, VideoFile.Text.LastIndexOf(".")) + "_rip.mp4";
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
                 throw;
+            }
+        }
+
+        private void AssFile_DragDrop(object sender, DragEventArgs e)
+        {
+            AssFile.Text = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+        }
+
+        private void AssFile_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void VideoFile_DragDrop(object sender, DragEventArgs e)
+        {
+            VideoFile.Text = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+        }
+
+        private void VideoFile_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
             }
         }
     }

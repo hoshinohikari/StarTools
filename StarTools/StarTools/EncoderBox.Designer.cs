@@ -278,6 +278,7 @@
             this.Controls.Add(this.FinBox);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "EncoderSetting";
             this.Text = "EncoderBox";
             this.Load += new System.EventHandler(this.EncoderSetting_Load);

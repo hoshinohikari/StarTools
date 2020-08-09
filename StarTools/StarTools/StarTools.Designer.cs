@@ -61,11 +61,14 @@
             // 
             // VideoFile
             // 
+            this.VideoFile.AllowDrop = true;
             this.VideoFile.Location = new System.Drawing.Point(108, 41);
             this.VideoFile.Name = "VideoFile";
             this.VideoFile.Size = new System.Drawing.Size(420, 21);
             this.VideoFile.TabIndex = 0;
             this.VideoFile.TextChanged += new System.EventHandler(this.VideoFile_TextChanged);
+            this.VideoFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.VideoFile_DragDrop);
+            this.VideoFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.VideoFile_DragEnter);
             // 
             // AddFiles1
             // 
@@ -89,10 +92,13 @@
             // 
             // AssFile
             // 
+            this.AssFile.AllowDrop = true;
             this.AssFile.Location = new System.Drawing.Point(108, 81);
             this.AssFile.Name = "AssFile";
             this.AssFile.Size = new System.Drawing.Size(420, 21);
             this.AssFile.TabIndex = 2;
+            this.AssFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.AssFile_DragDrop);
+            this.AssFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.AssFile_DragEnter);
             // 
             // SaveFiles
             // 
@@ -253,7 +259,7 @@
             // ffmpeg_Live
             // 
             this.ffmpeg_Live.Name = "ffmpeg_Live";
-            this.ffmpeg_Live.Size = new System.Drawing.Size(180, 22);
+            this.ffmpeg_Live.Size = new System.Drawing.Size(142, 22);
             this.ffmpeg_Live.Text = "ffmpeg直播";
             this.ffmpeg_Live.Click += new System.EventHandler(this.ffmpeg_Live_Click);
             // 
