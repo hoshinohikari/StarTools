@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using StarTools;
 
 namespace VideoBox
 {
@@ -324,6 +325,13 @@ namespace VideoBox
             {
                 e.Effect = DragDropEffects.None;
             }
+        }
+
+        private void ffmpegToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ffmpeg_demux f = new ffmpeg_demux();
+
+            f.ShowDialog();
         }
     }
 }

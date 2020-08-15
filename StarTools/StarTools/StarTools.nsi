@@ -3,7 +3,7 @@
 
 ; 安装程序初始定义常量
 !define PRODUCT_NAME "StarTools"
-!define PRODUCT_VERSION "0.11"
+!define PRODUCT_VERSION "0.12"
 !define PRODUCT_PUBLISHER "HoshinoKun"
 !define PRODUCT_WEB_SITE "https://www.346pro.club"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\StarTools.exe"
@@ -60,27 +60,40 @@ Section "必要组件" SEC01
   File "bin\Release\StarTools.exe.Config"
   SetOutPath "$INSTDIR\tool\ffmpeg"
   File "bin\Release\tool\ffmpeg\ffmpeg.exe"
-  SetOutPath "$INSTDIR\tool\HardEnc"
-  File "bin\Release\tool\HardEnc\swresample-3.dll"
-  File "bin\Release\tool\HardEnc\nvrtc-builtins64_101.dll"
-  File "bin\Release\tool\HardEnc\nvrtc64_101_0.dll"
-  File "bin\Release\tool\HardEnc\libass-9.dll"
-  File "bin\Release\tool\HardEnc\hdr10plus_gen.exe"
-  File "bin\Release\tool\HardEnc\avutil-56.dll"
-  File "bin\Release\tool\HardEnc\avformat-58.dll"
-  File "bin\Release\tool\HardEnc\avfilter-7.dll"
-  File "bin\Release\tool\HardEnc\avcodec-58.dll"
 SectionEnd
 
 Section "Intel" SEC02
+  SetOutPath "$INSTDIR\tool\HardEnc"
+  File "bin\Release\tool\HardEnc\avcodec-58.dll"
+  File "bin\Release\tool\HardEnc\avfilter-7.dll"
+  File "bin\Release\tool\HardEnc\avformat-58.dll"
+  File "bin\Release\tool\HardEnc\avutil-56.dll"
+  File "bin\Release\tool\HardEnc\libass-9.dll"
   File "bin\Release\tool\HardEnc\QSVEncC64.exe"
+  File "bin\Release\tool\HardEnc\swresample-3.dll"
 SectionEnd
 
 Section "Nvidia" SEC03
+  SetOutPath "$INSTDIR\tool\HardEnc"
+  File "bin\Release\tool\HardEnc\avcodec-58.dll"
+  File "bin\Release\tool\HardEnc\avfilter-7.dll"
+  File "bin\Release\tool\HardEnc\avformat-58.dll"
+  File "bin\Release\tool\HardEnc\avutil-56.dll"
+  File "bin\Release\tool\HardEnc\hdr10plus_gen.exe"
+  File "bin\Release\tool\HardEnc\libass-9.dll"
   File "bin\Release\tool\HardEnc\NVEncC64.exe"
+  File "bin\Release\tool\HardEnc\nvrtc64_101_0.dll"
+  File "bin\Release\tool\HardEnc\nvrtc-builtins64_101.dll"
+  File "bin\Release\tool\HardEnc\swresample-3.dll"
 SectionEnd
 
 Section "AMD" SEC04
+  SetOutPath "$INSTDIR\tool\HardEnc"
+  File "bin\Release\tool\HardEnc\avcodec-58.dll"
+  File "bin\Release\tool\HardEnc\avfilter-7.dll"
+  File "bin\Release\tool\HardEnc\avformat-58.dll"
+  File "bin\Release\tool\HardEnc\avutil-56.dll"
+  File "bin\Release\tool\HardEnc\swresample-3.dll"
   File "bin\Release\tool\HardEnc\VCEEncC64.exe"
 SectionEnd
 

@@ -56,6 +56,7 @@
             this.AudioBox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.ffmpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -251,7 +252,8 @@
             // ffmpeg常用功能ToolStripMenuItem
             // 
             this.ffmpeg常用功能ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ffmpeg_Live});
+            this.ffmpeg_Live,
+            this.ffmpegToolStripMenuItem});
             this.ffmpeg常用功能ToolStripMenuItem.Name = "ffmpeg常用功能ToolStripMenuItem";
             this.ffmpeg常用功能ToolStripMenuItem.Size = new System.Drawing.Size(110, 21);
             this.ffmpeg常用功能ToolStripMenuItem.Text = "ffmpeg常用功能";
@@ -259,7 +261,7 @@
             // ffmpeg_Live
             // 
             this.ffmpeg_Live.Name = "ffmpeg_Live";
-            this.ffmpeg_Live.Size = new System.Drawing.Size(142, 22);
+            this.ffmpeg_Live.Size = new System.Drawing.Size(180, 22);
             this.ffmpeg_Live.Text = "ffmpeg直播";
             this.ffmpeg_Live.Click += new System.EventHandler(this.ffmpeg_Live_Click);
             // 
@@ -308,6 +310,13 @@
             this.label8.Size = new System.Drawing.Size(149, 12);
             this.label8.TabIndex = 24;
             this.label8.Text = "如报错请选择压制音频模式";
+            // 
+            // ffmpegToolStripMenuItem
+            // 
+            this.ffmpegToolStripMenuItem.Name = "ffmpegToolStripMenuItem";
+            this.ffmpegToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ffmpegToolStripMenuItem.Text = "ffmpeg抽取";
+            this.ffmpegToolStripMenuItem.Click += new System.EventHandler(this.ffmpegToolStripMenuItem_Click);
             // 
             // MainBox
             // 
@@ -381,6 +390,7 @@
         private System.Windows.Forms.TextBox AudioBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ToolStripMenuItem ffmpegToolStripMenuItem;
     }
 }
 

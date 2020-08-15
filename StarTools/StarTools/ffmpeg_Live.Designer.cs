@@ -74,6 +74,7 @@
             // 
             // VideoFile
             // 
+            this.VideoFile.AllowDrop = true;
             this.VideoFile.Location = new System.Drawing.Point(104, 42);
             this.VideoFile.Name = "VideoFile";
             this.VideoFile.Size = new System.Drawing.Size(339, 21);
