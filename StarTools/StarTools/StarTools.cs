@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using StarTools;
+using System;
 using System.Configuration;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using StarTools;
 
 namespace VideoBox
 {
@@ -22,22 +14,110 @@ namespace VideoBox
             InitializeComponent();
         }
 
+        private static void AddUpdateAppSettings(string key, string value)
+        {
+            try
+            {
+                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var settings = configFile.AppSettings.Settings;
+                if (settings[key] == null)
+                    settings.Add(key, value);
+                else
+                    settings[key].Value = value;
+                configFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error writing app settings");
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            OutputFile.ReadOnly = true;
-            EncoderBox.SelectedIndex = 0;
-            comboBox1.SelectedIndex = 0;
-            AudioBox.Hide();
-            label7.Hide();
-            label8.Show();
-            AudioBox.Text = "192";
-            wBox.Text = "1280";
-            hBox.Text = "720";
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+
+                if (appSettings["EncoderBox_selected"] == null)
+                {
+                    AddUpdateAppSettings("EncoderBox_selected", "0");
+                    EncoderBox.SelectedIndex = 0;
+                }
+                else
+                {
+                    switch (appSettings["EncoderBox_selected"])
+                    {
+                        case "0":
+                            EncoderBox.SelectedIndex = 0;
+                            break;
+                        case "1":
+                            EncoderBox.SelectedIndex = 1;
+                            break;
+                        case "2":
+                            EncoderBox.SelectedIndex = 2;
+                            break;
+                    }
+                }
+
+                if (appSettings["Raws_audiomode"] == null)
+                {
+                    AddUpdateAppSettings("Raws_audiomode", "0");
+                    comboBox1.SelectedIndex = 0;
+                }
+                else
+                {
+                    switch (appSettings["Raws_audiomode"])
+                    {
+                        case "0":
+                            comboBox1.SelectedIndex = 0;
+                            AudioBox.Hide();
+                            label7.Hide();
+                            label8.Show();
+                            break;
+                        case "1":
+                            comboBox1.SelectedIndex = 1;
+                            AudioBox.Show();
+                            label7.Show();
+                            label8.Hide();
+                            break;
+                    }
+                }
+
+                if (appSettings["Raws_audiobit"] == null)
+                {
+                    AddUpdateAppSettings("Raws_audiobit", "192");
+                    AudioBox.Text = "192";
+                }
+                else
+                {
+                    AudioBox.Text = appSettings["Raws_audiobit"];
+                }
+
+                if (appSettings["ffmpeg_file"] == null)
+                    AddUpdateAppSettings("ffmpeg_file", "tool\\ffmpeg\\ffmpeg.exe");
+
+                if (appSettings["NVEnc_file"] == null)
+                    AddUpdateAppSettings("NVEnc_file", "tool\\HardEnc\\NVEncC64.exe");
+
+                if (appSettings["QSVEnc_file"] == null)
+                    AddUpdateAppSettings("QSVEnc_file", "tool\\HardEnc\\QSVEncC64.exe");
+
+                if (appSettings["VCEEnc_file"] == null)
+                    AddUpdateAppSettings("VCEEnc_file", "tool\\HardEnc\\VCEEncC64.exe");
+
+                wBox.Text = "1280";
+                hBox.Text = "720";
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error reading app settings");
+            }
         }
 
         private void AddFiles1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog()
+            var openFileDialog1 = new OpenFileDialog()
             {
                 FileName = "Select a video file",
                 Filter = "All video files (*.mp4;*.mkv;*.flv;*.m2ts;*.ts)|*.mp4;*.mkv;*.flv;*.m2ts;*.ts",
@@ -45,7 +125,6 @@ namespace VideoBox
             };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
                 try
                 {
                     VideoFile.Text = openFileDialog1.FileName;
@@ -55,12 +134,11 @@ namespace VideoBox
                     MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
                                     $"Details:\n\n{ex.StackTrace}");
                 }
-            }
         }
 
         private void AddFiles2_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog()
+            var openFileDialog1 = new OpenFileDialog()
             {
                 FileName = "Select a ass file",
                 Filter = "Ass files (*.ass)|*.ass",
@@ -68,7 +146,6 @@ namespace VideoBox
             };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
                 try
                 {
                     AssFile.Text = openFileDialog1.FileName;
@@ -78,12 +155,11 @@ namespace VideoBox
                     MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
                                     $"Details:\n\n{ex.StackTrace}");
                 }
-            }
         }
 
         private void SaveFiles_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog()
+            var saveFileDialog1 = new SaveFileDialog()
             {
                 FileName = "Output",
                 Filter = "Mp4 files (*.mp4)|*.mp4",
@@ -91,7 +167,6 @@ namespace VideoBox
             };
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
                 try
                 {
                     var filePath = saveFileDialog1.FileName;
@@ -102,13 +177,12 @@ namespace VideoBox
                     MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
                                     $"Details:\n\n{ex.StackTrace}");
                 }
-            }
         }
 
         private void rip_Click(object sender, EventArgs e)
         {
-            Process p = new Process();
-            string cmdLine="";
+            var p = new Process();
+            var cmdLine = "";
             var appSettings = ConfigurationManager.AppSettings;
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.UseShellExecute = false;
@@ -136,27 +210,26 @@ namespace VideoBox
                 temp = temp.Replace("\\", "\\\\\\\\");
                 temp = temp.Insert(temp.IndexOf(":"), "\\\\");
                 if (EncoderBox.SelectedIndex == 1)
-                {
-                    cmdLine = "tool\\HardEnc\\NVEncC64.exe --avhw -i \"" + VideoFile.Text +
-                              "\" --audio-codec 1?aac --vpp-subburn filename=\"" +
+                    cmdLine = appSettings["NVEnc_file"] + " --avhw -i \"" + VideoFile.Text +
+                              "\" --audio-codec aac --vpp-subburn filename=\"" +
                               AssFile.Text + "\"";
-                }
                 else
-                {
                     switch (EncoderBox.SelectedIndex)
                     {
                         case 0:
-                            cmdLine = "tool\\ffmpeg\\ffmpeg.exe -y -i \"" + VideoFile.Text +
+                            cmdLine = appSettings["ffmpeg_file"] + " -y -i \"" + VideoFile.Text +
                                       "\" -vf \"ass=" + temp +
-                                      "\" -codec:a copy -codec:v rawvideo -pix_fmt yuv420p -f nut - | tool\\HardEnc\\QSVEncC64.exe --avsw -i -";
+                                      "\" -codec:a copy -codec:v rawvideo -pix_fmt yuv420p -f nut - | " +
+                                      appSettings["QSVEnc_file"] + " --avsw -i -";
                             break;
                         case 1:
                             MessageBox.Show("Error!");
                             break;
                         case 2:
-                            cmdLine = "tool\\ffmpeg\\ffmpeg.exe -y -i \"" + VideoFile.Text +
+                            cmdLine = appSettings["ffmpeg_file"] + " -y -i \"" + VideoFile.Text +
                                       "\" -vf \"ass=" + temp +
-                                      "\" -codec:a copy -codec:v rawvideo -pix_fmt yuv420p -f nut - | tool\\HardEnc\\VCEEncC64.exe --avsw -i -";
+                                      "\" -codec:a copy -codec:v rawvideo -pix_fmt yuv420p -f nut - | " +
+                                      appSettings["VCEEnc_file"] + " --avsw -i -";
                             break;
                         case 3:
                             break;
@@ -164,22 +237,21 @@ namespace VideoBox
                             MessageBox.Show("Error!");
                             break;
                     }
-                }
             }
             else
             {
                 switch (EncoderBox.SelectedIndex)
                 {
                     case 0:
-                        cmdLine = "tool\\HardEnc\\QSVEncC64.exe --avhw -i \"" + VideoFile.Text +
+                        cmdLine = appSettings["QSVEnc_file"] + " --avhw -i \"" + VideoFile.Text +
                                   "\"";
                         break;
                     case 1:
-                        cmdLine = "tool\\HardEnc\\NVEncC64.exe --avhw -i \"" + VideoFile.Text +
+                        cmdLine = appSettings["NVEnc_file"] + " --avhw -i \"" + VideoFile.Text +
                                   "\"";
                         break;
                     case 2:
-                        cmdLine = "tool\\HardEnc\\VCEEncC64.exe --avhw -i \"" + VideoFile.Text +
+                        cmdLine = appSettings["VCEEnc_file"] + " --avhw -i \"" + VideoFile.Text +
                                   "\"";
                         break;
                     case 3:
@@ -196,17 +268,18 @@ namespace VideoBox
                     cmdLine = cmdLine + " --audio-copy";
                     break;
                 case 1:
-                    cmdLine = cmdLine + " --audio-codec 1?aac --audio-bitrate " + AudioBox.Text;
+                    cmdLine = cmdLine + " --audio-codec aac --audio-bitrate " + AudioBox.Text;
                     break;
             }
 
             try
             {
-                string result = appSettings["Code_rate_control_mode_selection"] ?? "Not Found";
+                var result = appSettings["Code_rate_control_mode_selection"] ?? "Not Found";
                 switch (result)
                 {
                     case "1":
-                        cmdLine = cmdLine + " --cqp " + appSettings["I"] + ":" + appSettings["P"] + ":" + appSettings["B"];
+                        cmdLine = cmdLine + " --cqp " + appSettings["I"] + ":" + appSettings["P"] + ":" +
+                                  appSettings["B"];
                         break;
                     case "2":
                         cmdLine = cmdLine + " --cbr " + appSettings["CBR"];
@@ -231,10 +304,7 @@ namespace VideoBox
             if (checkBox2.Checked)
                 cmdLine = cmdLine + " --output-res " + wBox.Text + "x" + hBox.Text;
 
-            if (appSettings["Code"] != null && appSettings["Code"] != "")
-            {
-                cmdLine = cmdLine + appSettings["Code"];
-            }
+            if (appSettings["Code"] != null && appSettings["Code"] != "") cmdLine = cmdLine + appSettings["Code"];
 
             cmdLine = cmdLine + " -o \"" + OutputFile.Text + "\"";
 
@@ -249,28 +319,31 @@ namespace VideoBox
 
         private void button1_Click(object sender, EventArgs e)
         {
-            EncoderSetting f = new EncoderSetting();
+            var f = new EncoderSetting();
 
             f.ShowDialog();
         }
 
         private void ffmpeg_Live_Click(object sender, EventArgs e)
         {
-            ffmpeg_Live f = new ffmpeg_Live();
+            var f = new ffmpeg_Live();
 
             f.ShowDialog();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var appSettings = ConfigurationManager.AppSettings;
             switch (comboBox1.SelectedIndex)
             {
                 case 0:
+                    AddUpdateAppSettings("Raws_audiomode", "0");
                     AudioBox.Hide();
                     label7.Hide();
                     label8.Show();
                     break;
                 case 1:
+                    AddUpdateAppSettings("Raws_audiomode", "1");
                     AudioBox.Show();
                     label7.Show();
                     label8.Hide();
@@ -293,45 +366,66 @@ namespace VideoBox
 
         private void AssFile_DragDrop(object sender, DragEventArgs e)
         {
-            AssFile.Text = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            AssFile.Text = ((Array) e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
         }
 
         private void AssFile_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
                 e.Effect = DragDropEffects.Link;
-
-            }
             else
-            {
                 e.Effect = DragDropEffects.None;
-            }
         }
 
         private void VideoFile_DragDrop(object sender, DragEventArgs e)
         {
-            VideoFile.Text = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            VideoFile.Text = ((Array) e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
         }
 
         private void VideoFile_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
                 e.Effect = DragDropEffects.Link;
-
-            }
             else
-            {
                 e.Effect = DragDropEffects.None;
-            }
         }
 
         private void ffmpegToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ffmpeg_demux f = new ffmpeg_demux();
-
+            var f = new ffmpeg_demux();
             f.ShowDialog();
+        }
+
+        private void needed_Click(object sender, EventArgs e)
+        {
+            var f = new needed();
+            f.ShowDialog();
+        }
+
+        private void EncoderBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+                AddUpdateAppSettings("EncoderBox_selected", EncoderBox.SelectedIndex.ToString());
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error reading app settings");
+            }
+        }
+
+        private void AudioBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+                AddUpdateAppSettings("Raws_audiobit", AudioBox.Text);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error reading app settings");
+            }
         }
     }
 }

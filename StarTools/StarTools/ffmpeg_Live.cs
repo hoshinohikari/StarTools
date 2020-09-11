@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Configuration;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace VideoBox
@@ -30,7 +24,7 @@ namespace VideoBox
 
         private void OpenVideo_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog()
+            var openFileDialog1 = new OpenFileDialog()
             {
                 FileName = "Select a video file",
                 Filter = "All video files (*.mp4;*.mkv;*.flv;*.m2ts;*.ts)|*.mp4;*.mkv;*.flv;*.m2ts;*.ts",
@@ -38,7 +32,6 @@ namespace VideoBox
             };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
                 try
                 {
                     VideoFile.Text = openFileDialog1.FileName;
@@ -48,11 +41,11 @@ namespace VideoBox
                     MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
                                     $"Details:\n\n{ex.StackTrace}");
                 }
-            }
         }
 
         private void Live_Click(object sender, EventArgs e)
         {
+            var appSettings = ConfigurationManager.AppSettings;
             if (VideoFile.Text == "")
             {
                 MessageBox.Show("请放入源文件!");
@@ -71,7 +64,7 @@ namespace VideoBox
                 return;
             }
 
-            Process p = new Process();
+            var p = new Process();
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardInput = true;
@@ -80,16 +73,16 @@ namespace VideoBox
             p.StartInfo.CreateNoWindow = false;
 
             p.Start();
-            switch(comboBox1.SelectedIndex)
+            switch (comboBox1.SelectedIndex)
             {
                 case 0:
-                    p.StandardInput.WriteLine("tool\\ffmpeg\\ffmpeg.exe -re -i \"" + VideoFile.Text +
+                    p.StandardInput.WriteLine(appSettings["ffmpeg_file"] + " -re -i \"" + VideoFile.Text +
                                               "\" -vcodec copy -acodec copy -f flv -flvflags no_duration_filesize \"" +
                                               RTMP.Text + LiveCode.Text +
                                               "\"");
                     break;
                 case 1:
-                    p.StandardInput.WriteLine("tool\\ffmpeg\\ffmpeg.exe -re -i \"" + VideoFile.Text +
+                    p.StandardInput.WriteLine(appSettings["ffmpeg_file"] + " -re -i \"" + VideoFile.Text +
                                               "\" -vcodec copy -acodec aac -b:a " + AudioBox.Text +
                                               "k -f flv -flvflags no_duration_filesize \"" +
                                               RTMP.Text + LiveCode.Text +
@@ -123,19 +116,14 @@ namespace VideoBox
         private void VideoFile_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
                 e.Effect = DragDropEffects.Link;
-
-            }
             else
-            {
                 e.Effect = DragDropEffects.None;
-            }
         }
 
         private void VideoFile_DragDrop(object sender, DragEventArgs e)
         {
-            VideoFile.Text = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            VideoFile.Text = ((Array) e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
         }
     }
 }

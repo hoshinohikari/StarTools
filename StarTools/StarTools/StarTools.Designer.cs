@@ -49,14 +49,16 @@
             this.wBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.ffmpeg常用功能ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ffmpeg = new System.Windows.Forms.ToolStripMenuItem();
             this.ffmpeg_Live = new System.Windows.Forms.ToolStripMenuItem();
+            this.ffmpeg_demux = new System.Windows.Forms.ToolStripMenuItem();
+            this.advantage = new System.Windows.Forms.ToolStripMenuItem();
+            this.needed = new System.Windows.Forms.ToolStripMenuItem();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.AudioBox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.ffmpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +67,7 @@
             this.VideoFile.AllowDrop = true;
             this.VideoFile.Location = new System.Drawing.Point(108, 41);
             this.VideoFile.Name = "VideoFile";
+            this.VideoFile.ReadOnly = true;
             this.VideoFile.Size = new System.Drawing.Size(420, 21);
             this.VideoFile.TabIndex = 0;
             this.VideoFile.TextChanged += new System.EventHandler(this.VideoFile_TextChanged);
@@ -96,6 +99,7 @@
             this.AssFile.AllowDrop = true;
             this.AssFile.Location = new System.Drawing.Point(108, 81);
             this.AssFile.Name = "AssFile";
+            this.AssFile.ReadOnly = true;
             this.AssFile.Size = new System.Drawing.Size(420, 21);
             this.AssFile.TabIndex = 2;
             this.AssFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.AssFile_DragDrop);
@@ -115,6 +119,7 @@
             // 
             this.OutputFile.Location = new System.Drawing.Point(108, 121);
             this.OutputFile.Name = "OutputFile";
+            this.OutputFile.ReadOnly = true;
             this.OutputFile.Size = new System.Drawing.Size(420, 21);
             this.OutputFile.TabIndex = 4;
             // 
@@ -185,6 +190,7 @@
             this.EncoderBox.Name = "EncoderBox";
             this.EncoderBox.Size = new System.Drawing.Size(420, 20);
             this.EncoderBox.TabIndex = 12;
+            this.EncoderBox.SelectedIndexChanged += new System.EventHandler(this.EncoderBox_SelectedIndexChanged);
             // 
             // button1
             // 
@@ -242,21 +248,22 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ffmpeg常用功能ToolStripMenuItem});
+            this.ffmpeg,
+            this.advantage});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(659, 25);
             this.menuStrip1.TabIndex = 19;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // ffmpeg常用功能ToolStripMenuItem
+            // ffmpeg
             // 
-            this.ffmpeg常用功能ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ffmpeg.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ffmpeg_Live,
-            this.ffmpegToolStripMenuItem});
-            this.ffmpeg常用功能ToolStripMenuItem.Name = "ffmpeg常用功能ToolStripMenuItem";
-            this.ffmpeg常用功能ToolStripMenuItem.Size = new System.Drawing.Size(110, 21);
-            this.ffmpeg常用功能ToolStripMenuItem.Text = "ffmpeg常用功能";
+            this.ffmpeg_demux});
+            this.ffmpeg.Name = "ffmpeg";
+            this.ffmpeg.Size = new System.Drawing.Size(44, 21);
+            this.ffmpeg.Text = "工具";
             // 
             // ffmpeg_Live
             // 
@@ -264,6 +271,28 @@
             this.ffmpeg_Live.Size = new System.Drawing.Size(180, 22);
             this.ffmpeg_Live.Text = "ffmpeg直播";
             this.ffmpeg_Live.Click += new System.EventHandler(this.ffmpeg_Live_Click);
+            // 
+            // ffmpeg_demux
+            // 
+            this.ffmpeg_demux.Name = "ffmpeg_demux";
+            this.ffmpeg_demux.Size = new System.Drawing.Size(180, 22);
+            this.ffmpeg_demux.Text = "ffmpeg抽取";
+            this.ffmpeg_demux.Click += new System.EventHandler(this.ffmpegToolStripMenuItem_Click);
+            // 
+            // advantage
+            // 
+            this.advantage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.needed});
+            this.advantage.Name = "advantage";
+            this.advantage.Size = new System.Drawing.Size(44, 21);
+            this.advantage.Text = "高级";
+            // 
+            // needed
+            // 
+            this.needed.Name = "needed";
+            this.needed.Size = new System.Drawing.Size(136, 22);
+            this.needed.Text = "依赖管理器";
+            this.needed.Click += new System.EventHandler(this.needed_Click);
             // 
             // label6
             // 
@@ -292,6 +321,7 @@
             this.AudioBox.Name = "AudioBox";
             this.AudioBox.Size = new System.Drawing.Size(52, 21);
             this.AudioBox.TabIndex = 22;
+            this.AudioBox.TextChanged += new System.EventHandler(this.AudioBox_TextChanged);
             // 
             // label7
             // 
@@ -310,13 +340,6 @@
             this.label8.Size = new System.Drawing.Size(149, 12);
             this.label8.TabIndex = 24;
             this.label8.Text = "如报错请选择压制音频模式";
-            // 
-            // ffmpegToolStripMenuItem
-            // 
-            this.ffmpegToolStripMenuItem.Name = "ffmpegToolStripMenuItem";
-            this.ffmpegToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ffmpegToolStripMenuItem.Text = "ffmpeg抽取";
-            this.ffmpegToolStripMenuItem.Click += new System.EventHandler(this.ffmpegToolStripMenuItem_Click);
             // 
             // MainBox
             // 
@@ -383,14 +406,16 @@
         private System.Windows.Forms.TextBox wBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem ffmpeg常用功能ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ffmpeg;
         private System.Windows.Forms.ToolStripMenuItem ffmpeg_Live;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox AudioBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ToolStripMenuItem ffmpegToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ffmpeg_demux;
+        private System.Windows.Forms.ToolStripMenuItem advantage;
+        private System.Windows.Forms.ToolStripMenuItem needed;
     }
 }
 

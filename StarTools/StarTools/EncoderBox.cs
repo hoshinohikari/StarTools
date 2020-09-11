@@ -1,39 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace VideoBox
 {
     public partial class EncoderSetting : Form
     {
-
         public EncoderSetting()
         {
             InitializeComponent();
         }
 
-        static void AddUpdateAppSettings(string key, string value)
+        private static void AddUpdateAppSettings(string key, string value)
         {
             try
             {
                 var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 var settings = configFile.AppSettings.Settings;
                 if (settings[key] == null)
-                {
                     settings.Add(key, value);
-                }
                 else
-                {
                     settings[key].Value = value;
-                }
                 configFile.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
             }
@@ -48,7 +35,7 @@ namespace VideoBox
             try
             {
                 var appSettings = ConfigurationManager.AppSettings;
-                string result = appSettings["Code_rate_control_mode_selection"] ?? "Not Found";
+                var result = appSettings["Code_rate_control_mode_selection"] ?? "Not Found";
                 switch (result)
                 {
                     case "1":
@@ -69,24 +56,54 @@ namespace VideoBox
                 }
 
                 if (appSettings["I"] == null)
+                {
                     AddUpdateAppSettings("I", "24");
-                IBox.Text = appSettings["I"];
+                    IBox.Text = "24";
+                }
+                else
+                {
+                    IBox.Text = appSettings["I"];
+                }
 
                 if (appSettings["P"] == null)
+                {
                     AddUpdateAppSettings("P", "26");
-                PBox.Text= appSettings["P"];
+                    PBox.Text = "26";
+                }
+                else
+                {
+                    PBox.Text = appSettings["P"];
+                }
 
                 if (appSettings["B"] == null)
+                {
                     AddUpdateAppSettings("B", "27");
-                BBox.Text = appSettings["B"];
+                    BBox.Text = "27";
+                }
+                else
+                {
+                    BBox.Text = appSettings["B"];
+                }
 
                 if (appSettings["CBR"] == null)
+                {
                     AddUpdateAppSettings("CBR", "3000");
-                CBRBox.Text = appSettings["CBR"];
+                    CBRBox.Text = "3000";
+                }
+                else
+                {
+                    CBRBox.Text = appSettings["CBR"];
+                }
 
                 if (appSettings["VBR"] == null)
+                {
                     AddUpdateAppSettings("VBR", "3000");
-                VBRBox.Text = appSettings["VBR"];
+                    VBRBox.Text = "3000";
+                }
+                else
+                {
+                    VBRBox.Text = appSettings["VBR"];
+                }
             }
             catch (ConfigurationErrorsException)
             {
