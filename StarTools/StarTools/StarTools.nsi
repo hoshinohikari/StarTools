@@ -3,7 +3,7 @@
 
 ; 安装程序初始定义常量
 !define PRODUCT_NAME "StarTools"
-!define PRODUCT_VERSION "0.13"
+!define PRODUCT_VERSION "0.3"
 !define PRODUCT_PUBLISHER "HoshinoKun"
 !define PRODUCT_WEB_SITE "https://www.346pro.club"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\StarTools.exe"
@@ -54,6 +54,7 @@ Section "必要组件" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
   File "bin\x64\Release\StarTools.exe"
+  File "bin\x64\Release\SunnyUI.dll"
   CreateDirectory "$SMPROGRAMS\StarTools"
   CreateShortCut "$SMPROGRAMS\StarTools\StarTools.lnk" "$INSTDIR\StarTools.exe"
   CreateShortCut "$DESKTOP\StarTools.lnk" "$INSTDIR\StarTools.exe"

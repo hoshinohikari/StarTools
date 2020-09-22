@@ -73,10 +73,14 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SunnyUI">
+      <HintPath>..\..\..\SunnyUI\Bin\SunnyUI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -89,6 +93,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
     <Compile Include="ffmpeg_demux.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +123,12 @@
     <Compile Include="StarTools.Designer.cs">
       <DependentUpon>StarTools.cs</DependentUpon>
     </Compile>
+    <Compile Include="Encode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Encode.Designer.cs">
+      <DependentUpon>Encode.cs</DependentUpon>
+    </Compile>
     <Compile Include="EncoderBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +137,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Encode.resx">
+      <DependentUpon>Encode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EncoderBox.resx">
+      <DependentUpon>EncoderBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ffmpeg_demux.resx">
       <DependentUpon>ffmpeg_demux.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,9 +157,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StarTools.resx">
       <DependentUpon>StarTools.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EncoderBox.resx">
-      <DependentUpon>EncoderBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

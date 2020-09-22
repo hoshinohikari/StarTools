@@ -5,10 +5,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Security;
 using System.Windows.Forms;
+using Sunny.UI;
 
 namespace StarTools
 {
-    public partial class ffmpeg_demux : Form
+    public partial class ffmpeg_demux : UITitlePage
     {
         private string track_num, track_kinds;
 
@@ -17,13 +18,13 @@ namespace StarTools
             InitializeComponent();
         }
 
-        private void OpenVideo_Click(object sender, EventArgs e)
+        private void AddVideoFiles_Click(object sender, EventArgs e)
         {
-            var openFileDialog1 = new OpenFileDialog()
+            var openFileDialog1 = new OpenFileDialog
             {
                 FileName = "Select a video file",
-                Filter = "All video files (*.mp4;*.mkv;*.flv;*.m2ts;*.ts)|*.mp4;*.mkv;*.flv;*.m2ts;*.ts",
-                Title = "Open video file"
+                Filter = @"All video files (*.mp4;*.mkv;*.flv;*.m2ts;*.ts)|*.mp4;*.mkv;*.flv;*.m2ts;*.ts",
+                Title = @"Open video file"
             };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -66,13 +67,13 @@ namespace StarTools
             p.StandardInput.WriteLine(appSettings["ffmpeg_file"] + " -i \"" + VideoFile.Text + "\"");
             p.StandardInput.AutoFlush = true;
             p.StandardInput.WriteLine("exit");
-            //p.StandardInput.WriteLine("exit");
             var reader = p.StandardError;
             var curLine = reader.ReadLine();
             while (!reader.EndOfStream)
             {
                 if (!string.IsNullOrEmpty(curLine))
-                    if (curLine.Contains("Stream #") && curLine[curLine.IndexOf("Stream #") - 2] == ' ')
+                    if (curLine.Contains("Stream #") &&
+                        curLine[curLine.IndexOf("Stream #", StringComparison.Ordinal) - 2] == ' ')
                         Rawslist.Items.Add(curLine);
                 curLine = reader.ReadLine();
             }
@@ -82,13 +83,13 @@ namespace StarTools
             p.Close();
         }
 
-        private void SaveFiles_Click(object sender, EventArgs e)
+        private void SaveFile_Click(object sender, EventArgs e)
         {
-            var saveFileDialog1 = new SaveFileDialog()
+            var saveFileDialog1 = new SaveFileDialog
             {
                 FileName = "Output",
-                Filter = "Mp4 files (*.mp4)|*.mp4",
-                Title = "Save a mp4 file"
+                Filter = @"Mp4 files (*.mp4)|*.mp4",
+                Title = @"Save a mp4 file"
             };
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -102,29 +103,6 @@ namespace StarTools
                     MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
                                     $"Details:\n\n{ex.StackTrace}");
                 }
-        }
-
-        private void Rawslist_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var openWith = new Dictionary<string, string>();
-            openWith.Add("h26", ".h264");
-            openWith.Add("aac", ".m4a");
-            openWith.Add("ass", ".ass");
-            openWith.Add("ala", ".m4a");
-            openWith.Add("mp3", ".mp3");
-            openWith.Add("pcm", ".wav");
-            openWith.Add("fla", ".flac");
-            openWith.Add("hev", ".hevc");
-            if (Rawslist.SelectedIndex != -1)
-            {
-                track_num = Rawslist.SelectedItem.ToString()
-                    .Substring(Rawslist.SelectedItem.ToString().IndexOf("Stream #") + 8, 3);
-                track_kinds = Rawslist.SelectedItem.ToString()
-                    .Substring(Rawslist.SelectedItem.ToString().IndexOf(":", 22) + 2, 3);
-                OutputFile.Text = VideoFile.Text.Substring(0, VideoFile.Text.LastIndexOf(".")) + "_demux_" +
-                                  Rawslist.SelectedIndex +
-                                  openWith[track_kinds];
-            }
         }
 
         private void demux_Click(object sender, EventArgs e)
@@ -144,9 +122,31 @@ namespace StarTools
                                       OutputFile.Text + "\"");
         }
 
-        private void Backout_Click(object sender, EventArgs e)
+        private void Rawslist_ItemClick(object sender, EventArgs e)
         {
-            Close();
+            var openWith = new Dictionary<string, string>
+            {
+                {"h26", ".h264"},
+                {"aac", ".m4a"},
+                {"ass", ".ass"},
+                {"ala", ".m4a"},
+                {"mp3", ".mp3"},
+                {"pcm", ".wav"},
+                {"fla", ".flac"},
+                {"hev", ".hevc"}
+            };
+            if (Rawslist.SelectedIndex != -1)
+            {
+                track_num = Rawslist.SelectedItem.ToString()
+                    .Substring(Rawslist.SelectedItem.ToString().IndexOf("Stream #", StringComparison.Ordinal) + 8, 3);
+                track_kinds = Rawslist.SelectedItem.ToString()
+                    .Substring(Rawslist.SelectedItem.ToString().IndexOf(":", 22, StringComparison.Ordinal) + 2, 3);
+                OutputFile.Text =
+                    VideoFile.Text.Substring(0, VideoFile.Text.LastIndexOf(".", StringComparison.Ordinal)) +
+                    @"_demux_" +
+                    Rawslist.SelectedIndex +
+                    openWith[track_kinds];
+            }
         }
     }
 }

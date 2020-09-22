@@ -1,6 +1,6 @@
-﻿namespace VideoBox
+﻿namespace StarTools
 {
-    partial class EncoderSetting
+    partial class EncoderBox
     {
         /// <summary>
         /// Required designer variable.
@@ -28,292 +28,338 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EncoderSetting));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.CBRBox = new System.Windows.Forms.TextBox();
-            this.VBRBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.PBox = new System.Windows.Forms.TextBox();
-            this.BBox = new System.Windows.Forms.TextBox();
-            this.IBox = new System.Windows.Forms.TextBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.codeBox = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.FinBox = new System.Windows.Forms.TextBox();
-            this.Save = new System.Windows.Forms.Button();
-            this.Backout = new System.Windows.Forms.Button();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.uiRadioButtonGroup1 = new Sunny.UI.UIRadioButtonGroup();
+            this.uiRadioButton1 = new Sunny.UI.UIRadioButton();
+            this.uiRadioButton2 = new Sunny.UI.UIRadioButton();
+            this.uiRadioButton3 = new Sunny.UI.UIRadioButton();
+            this.uiLabel1 = new Sunny.UI.UILabel();
+            this.IBox = new Sunny.UI.UITextBox();
+            this.PBox = new Sunny.UI.UITextBox();
+            this.uiLabel2 = new Sunny.UI.UILabel();
+            this.BBox = new Sunny.UI.UITextBox();
+            this.uiLabel3 = new Sunny.UI.UILabel();
+            this.CBRBox = new Sunny.UI.UITextBox();
+            this.uiLabel4 = new Sunny.UI.UILabel();
+            this.uiLabel5 = new Sunny.UI.UILabel();
+            this.VBRBox = new Sunny.UI.UITextBox();
+            this.Save = new Sunny.UI.UIButton();
+            this.uiLabel6 = new Sunny.UI.UILabel();
+            this.AudioMode = new Sunny.UI.UIComboBox();
+            this.uiLabel7 = new Sunny.UI.UILabel();
+            this.uiLabel8 = new Sunny.UI.UILabel();
+            this.AudioBox = new Sunny.UI.UITextBox();
+            this.PagePanel.SuspendLayout();
+            this.uiRadioButtonGroup1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // PagePanel
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(327, 219);
-            this.tabControl1.TabIndex = 0;
+            this.PagePanel.Controls.Add(this.uiLabel7);
+            this.PagePanel.Controls.Add(this.uiLabel8);
+            this.PagePanel.Controls.Add(this.AudioMode);
+            this.PagePanel.Controls.Add(this.AudioBox);
+            this.PagePanel.Controls.Add(this.uiLabel6);
+            this.PagePanel.Controls.Add(this.Save);
+            this.PagePanel.Controls.Add(this.uiRadioButtonGroup1);
+            this.PagePanel.Size = new System.Drawing.Size(658, 378);
             // 
-            // tabPage1
+            // uiRadioButtonGroup1
             // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.CBRBox);
-            this.tabPage1.Controls.Add(this.VBRBox);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.PBox);
-            this.tabPage1.Controls.Add(this.BBox);
-            this.tabPage1.Controls.Add(this.IBox);
-            this.tabPage1.Controls.Add(this.radioButton3);
-            this.tabPage1.Controls.Add(this.radioButton2);
-            this.tabPage1.Controls.Add(this.radioButton1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(319, 193);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "基本";
+            this.uiRadioButtonGroup1.Controls.Add(this.uiLabel5);
+            this.uiRadioButtonGroup1.Controls.Add(this.VBRBox);
+            this.uiRadioButtonGroup1.Controls.Add(this.uiLabel4);
+            this.uiRadioButtonGroup1.Controls.Add(this.CBRBox);
+            this.uiRadioButtonGroup1.Controls.Add(this.BBox);
+            this.uiRadioButtonGroup1.Controls.Add(this.uiLabel3);
+            this.uiRadioButtonGroup1.Controls.Add(this.PBox);
+            this.uiRadioButtonGroup1.Controls.Add(this.uiLabel2);
+            this.uiRadioButtonGroup1.Controls.Add(this.IBox);
+            this.uiRadioButtonGroup1.Controls.Add(this.uiLabel1);
+            this.uiRadioButtonGroup1.Controls.Add(this.uiRadioButton3);
+            this.uiRadioButtonGroup1.Controls.Add(this.uiRadioButton2);
+            this.uiRadioButtonGroup1.Controls.Add(this.uiRadioButton1);
+            this.uiRadioButtonGroup1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiRadioButtonGroup1.Location = new System.Drawing.Point(13, 8);
+            this.uiRadioButtonGroup1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiRadioButtonGroup1.Name = "uiRadioButtonGroup1";
+            this.uiRadioButtonGroup1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            this.uiRadioButtonGroup1.Size = new System.Drawing.Size(632, 264);
+            this.uiRadioButtonGroup1.TabIndex = 0;
+            this.uiRadioButtonGroup1.Text = "码率控制";
             // 
-            // label5
+            // uiRadioButton1
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(90, 151);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "kbps";
+            this.uiRadioButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiRadioButton1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiRadioButton1.Location = new System.Drawing.Point(19, 36);
+            this.uiRadioButton1.Name = "uiRadioButton1";
+            this.uiRadioButton1.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiRadioButton1.Size = new System.Drawing.Size(610, 35);
+            this.uiRadioButton1.TabIndex = 0;
+            this.uiRadioButton1.Text = "cqp(默认模式，设置值越高文件越小，后面的值越低动态越不容易模糊)";
             // 
-            // label4
+            // uiRadioButton2
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(90, 102);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "kbps";
+            this.uiRadioButton2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiRadioButton2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiRadioButton2.Location = new System.Drawing.Point(19, 108);
+            this.uiRadioButton2.Name = "uiRadioButton2";
+            this.uiRadioButton2.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiRadioButton2.Size = new System.Drawing.Size(158, 29);
+            this.uiRadioButton2.TabIndex = 1;
+            this.uiRadioButton2.Text = "cbr(固定比特率)";
             // 
-            // CBRBox
+            // uiRadioButton3
             // 
-            this.CBRBox.Location = new System.Drawing.Point(34, 99);
-            this.CBRBox.Name = "CBRBox";
-            this.CBRBox.Size = new System.Drawing.Size(50, 21);
-            this.CBRBox.TabIndex = 13;
-            this.CBRBox.TextChanged += new System.EventHandler(this.Box_TextChanged);
+            this.uiRadioButton3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiRadioButton3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiRadioButton3.Location = new System.Drawing.Point(19, 177);
+            this.uiRadioButton3.Name = "uiRadioButton3";
+            this.uiRadioButton3.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiRadioButton3.Size = new System.Drawing.Size(150, 29);
+            this.uiRadioButton3.TabIndex = 2;
+            this.uiRadioButton3.Text = "vbr(可变比特率)";
             // 
-            // VBRBox
+            // uiLabel1
             // 
-            this.VBRBox.Location = new System.Drawing.Point(34, 148);
-            this.VBRBox.Name = "VBRBox";
-            this.VBRBox.Size = new System.Drawing.Size(50, 21);
-            this.VBRBox.TabIndex = 12;
-            this.VBRBox.TextChanged += new System.EventHandler(this.Box_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(163, 53);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(11, 12);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "B";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(90, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(11, 12);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "P";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(11, 12);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "I";
-            // 
-            // PBox
-            // 
-            this.PBox.Location = new System.Drawing.Point(107, 50);
-            this.PBox.Name = "PBox";
-            this.PBox.Size = new System.Drawing.Size(50, 21);
-            this.PBox.TabIndex = 8;
-            this.PBox.TextChanged += new System.EventHandler(this.Box_TextChanged);
-            // 
-            // BBox
-            // 
-            this.BBox.Location = new System.Drawing.Point(180, 50);
-            this.BBox.Name = "BBox";
-            this.BBox.Size = new System.Drawing.Size(50, 21);
-            this.BBox.TabIndex = 7;
-            this.BBox.TextChanged += new System.EventHandler(this.Box_TextChanged);
+            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel1.Location = new System.Drawing.Point(19, 78);
+            this.uiLabel1.Name = "uiLabel1";
+            this.uiLabel1.Size = new System.Drawing.Size(18, 23);
+            this.uiLabel1.TabIndex = 3;
+            this.uiLabel1.Text = "I";
+            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // IBox
             // 
-            this.IBox.Location = new System.Drawing.Point(34, 50);
+            this.IBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.IBox.FillColor = System.Drawing.Color.White;
+            this.IBox.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.IBox.Location = new System.Drawing.Point(44, 71);
+            this.IBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.IBox.Maximum = 2147483647D;
+            this.IBox.Minimum = -2147483648D;
             this.IBox.Name = "IBox";
-            this.IBox.Size = new System.Drawing.Size(50, 21);
-            this.IBox.TabIndex = 6;
-            this.IBox.TextChanged += new System.EventHandler(this.Box_TextChanged);
+            this.IBox.Padding = new System.Windows.Forms.Padding(5);
+            this.IBox.Size = new System.Drawing.Size(44, 29);
+            this.IBox.TabIndex = 4;
             // 
-            // radioButton3
+            // PBox
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(6, 126);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(113, 16);
-            this.radioButton3.TabIndex = 5;
-            this.radioButton3.Text = "vbr(可变比特率)";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            this.PBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.PBox.FillColor = System.Drawing.Color.White;
+            this.PBox.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.PBox.Location = new System.Drawing.Point(125, 71);
+            this.PBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PBox.Maximum = 2147483647D;
+            this.PBox.Minimum = -2147483648D;
+            this.PBox.Name = "PBox";
+            this.PBox.Padding = new System.Windows.Forms.Padding(5);
+            this.PBox.Size = new System.Drawing.Size(44, 29);
+            this.PBox.TabIndex = 6;
             // 
-            // radioButton2
+            // uiLabel2
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 77);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(113, 16);
-            this.radioButton2.TabIndex = 4;
-            this.radioButton2.Text = "cbr(固定比特率)";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel2.Location = new System.Drawing.Point(100, 78);
+            this.uiLabel2.Name = "uiLabel2";
+            this.uiLabel2.Size = new System.Drawing.Size(18, 23);
+            this.uiLabel2.TabIndex = 5;
+            this.uiLabel2.Text = "P";
+            this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // radioButton1
+            // BBox
             // 
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 6);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(0);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(299, 38);
-            this.radioButton1.TabIndex = 3;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "cqp(默认模式，设置值越高文件越小，后面的值越低动态越不容易模糊)";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            this.BBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.BBox.FillColor = System.Drawing.Color.White;
+            this.BBox.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.BBox.Location = new System.Drawing.Point(206, 71);
+            this.BBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.BBox.Maximum = 2147483647D;
+            this.BBox.Minimum = -2147483648D;
+            this.BBox.Name = "BBox";
+            this.BBox.Padding = new System.Windows.Forms.Padding(5);
+            this.BBox.Size = new System.Drawing.Size(44, 29);
+            this.BBox.TabIndex = 6;
             // 
-            // tabPage2
+            // uiLabel3
             // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.Controls.Add(this.codeBox);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(319, 193);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "高级";
+            this.uiLabel3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel3.Location = new System.Drawing.Point(181, 78);
+            this.uiLabel3.Name = "uiLabel3";
+            this.uiLabel3.Size = new System.Drawing.Size(18, 23);
+            this.uiLabel3.TabIndex = 5;
+            this.uiLabel3.Text = "B";
+            this.uiLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // codeBox
+            // CBRBox
             // 
-            this.codeBox.Location = new System.Drawing.Point(18, 29);
-            this.codeBox.Multiline = true;
-            this.codeBox.Name = "codeBox";
-            this.codeBox.Size = new System.Drawing.Size(275, 140);
-            this.codeBox.TabIndex = 16;
-            this.codeBox.TextChanged += new System.EventHandler(this.Box_TextChanged);
+            this.CBRBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.CBRBox.FillColor = System.Drawing.Color.White;
+            this.CBRBox.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.CBRBox.Location = new System.Drawing.Point(44, 145);
+            this.CBRBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CBRBox.Maximum = 2147483647D;
+            this.CBRBox.Minimum = -2147483648D;
+            this.CBRBox.Name = "CBRBox";
+            this.CBRBox.Padding = new System.Windows.Forms.Padding(5);
+            this.CBRBox.Size = new System.Drawing.Size(74, 29);
+            this.CBRBox.TabIndex = 5;
             // 
-            // label6
+            // uiLabel4
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 14);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 12);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "自定义命令行";
+            this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel4.Location = new System.Drawing.Point(125, 151);
+            this.uiLabel4.Name = "uiLabel4";
+            this.uiLabel4.Size = new System.Drawing.Size(52, 23);
+            this.uiLabel4.TabIndex = 7;
+            this.uiLabel4.Text = "kbps";
+            this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // FinBox
+            // uiLabel5
             // 
-            this.FinBox.Location = new System.Drawing.Point(16, 237);
-            this.FinBox.Multiline = true;
-            this.FinBox.Name = "FinBox";
-            this.FinBox.ReadOnly = true;
-            this.FinBox.Size = new System.Drawing.Size(319, 167);
-            this.FinBox.TabIndex = 17;
+            this.uiLabel5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel5.Location = new System.Drawing.Point(125, 225);
+            this.uiLabel5.Name = "uiLabel5";
+            this.uiLabel5.Size = new System.Drawing.Size(52, 23);
+            this.uiLabel5.TabIndex = 9;
+            this.uiLabel5.Text = "kbps";
+            this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // VBRBox
+            // 
+            this.VBRBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.VBRBox.FillColor = System.Drawing.Color.White;
+            this.VBRBox.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.VBRBox.Location = new System.Drawing.Point(44, 219);
+            this.VBRBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.VBRBox.Maximum = 2147483647D;
+            this.VBRBox.Minimum = -2147483648D;
+            this.VBRBox.Name = "VBRBox";
+            this.VBRBox.Padding = new System.Windows.Forms.Padding(5);
+            this.VBRBox.Size = new System.Drawing.Size(74, 29);
+            this.VBRBox.TabIndex = 8;
             // 
             // Save
             // 
-            this.Save.Location = new System.Drawing.Point(35, 417);
+            this.Save.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Save.FillColor = System.Drawing.Color.White;
+            this.Save.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.Save.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.Save.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.Save.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.Save.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(98)))), ((int)(((byte)(102)))));
+            this.Save.ForeHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.Save.ForePressColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
+            this.Save.ForeSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
+            this.Save.Location = new System.Drawing.Point(542, 309);
             this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(75, 21);
-            this.Save.TabIndex = 18;
+            this.Save.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(219)))), ((int)(((byte)(227)))));
+            this.Save.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(222)))), ((int)(((byte)(255)))));
+            this.Save.Size = new System.Drawing.Size(100, 35);
+            this.Save.Style = Sunny.UI.UIStyle.White;
+            this.Save.StyleCustomMode = true;
+            this.Save.TabIndex = 32;
             this.Save.Text = "保存";
-            this.Save.UseVisualStyleBackColor = true;
             this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
-            // Backout
+            // uiLabel6
             // 
-            this.Backout.Location = new System.Drawing.Point(246, 417);
-            this.Backout.Name = "Backout";
-            this.Backout.Size = new System.Drawing.Size(75, 21);
-            this.Backout.TabIndex = 19;
-            this.Backout.Text = "取消";
-            this.Backout.UseVisualStyleBackColor = true;
-            this.Backout.Click += new System.EventHandler(this.Backout_Click);
+            this.uiLabel6.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel6.Location = new System.Drawing.Point(32, 312);
+            this.uiLabel6.Name = "uiLabel6";
+            this.uiLabel6.Size = new System.Drawing.Size(79, 23);
+            this.uiLabel6.TabIndex = 10;
+            this.uiLabel6.Text = "音频模式";
+            this.uiLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // EncoderSetting
+            // AudioMode
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AudioMode.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.AudioMode.FillColor = System.Drawing.Color.White;
+            this.AudioMode.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.AudioMode.Items.AddRange(new object[] {
+            "复制音频",
+            "压制音频"});
+            this.AudioMode.Location = new System.Drawing.Point(117, 309);
+            this.AudioMode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.AudioMode.MinimumSize = new System.Drawing.Size(63, 0);
+            this.AudioMode.Name = "AudioMode";
+            this.AudioMode.Padding = new System.Windows.Forms.Padding(0, 0, 30, 0);
+            this.AudioMode.Size = new System.Drawing.Size(95, 29);
+            this.AudioMode.TabIndex = 33;
+            this.AudioMode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AudioMode.SelectedIndexChanged += new System.EventHandler(this.AudioMode_SelectedIndexChanged);
+            // 
+            // uiLabel7
+            // 
+            this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel7.Location = new System.Drawing.Point(219, 312);
+            this.uiLabel7.Name = "uiLabel7";
+            this.uiLabel7.Size = new System.Drawing.Size(204, 23);
+            this.uiLabel7.TabIndex = 34;
+            this.uiLabel7.Text = "如报错请选择压制音频模式";
+            this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // uiLabel8
+            // 
+            this.uiLabel8.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel8.Location = new System.Drawing.Point(301, 312);
+            this.uiLabel8.Name = "uiLabel8";
+            this.uiLabel8.Size = new System.Drawing.Size(52, 23);
+            this.uiLabel8.TabIndex = 36;
+            this.uiLabel8.Text = "kbps";
+            this.uiLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // AudioBox
+            // 
+            this.AudioBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.AudioBox.FillColor = System.Drawing.Color.White;
+            this.AudioBox.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.AudioBox.Location = new System.Drawing.Point(220, 309);
+            this.AudioBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.AudioBox.Maximum = 2147483647D;
+            this.AudioBox.Minimum = -2147483648D;
+            this.AudioBox.Name = "AudioBox";
+            this.AudioBox.Padding = new System.Windows.Forms.Padding(5);
+            this.AudioBox.Size = new System.Drawing.Size(74, 29);
+            this.AudioBox.TabIndex = 35;
+            // 
+            // EncoderBox
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(351, 450);
-            this.Controls.Add(this.Backout);
-            this.Controls.Add(this.Save);
-            this.Controls.Add(this.FinBox);
-            this.Controls.Add(this.tabControl1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "EncoderSetting";
-            this.Text = "EncoderBox";
-            this.Load += new System.EventHandler(this.EncoderSetting_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.ClientSize = new System.Drawing.Size(658, 413);
+            this.Name = "EncoderBox";
+            this.Text = "码率控制";
+            this.Load += new System.EventHandler(this.EncoderBox_Load);
+            this.PagePanel.ResumeLayout(false);
+            this.uiRadioButtonGroup1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox CBRBox;
-        private System.Windows.Forms.TextBox VBRBox;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox PBox;
-        private System.Windows.Forms.TextBox BBox;
-        private System.Windows.Forms.TextBox IBox;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.TextBox codeBox;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox FinBox;
-        private System.Windows.Forms.Button Save;
-        private System.Windows.Forms.Button Backout;
+        private Sunny.UI.UIRadioButtonGroup uiRadioButtonGroup1;
+        private Sunny.UI.UIRadioButton uiRadioButton3;
+        private Sunny.UI.UIRadioButton uiRadioButton2;
+        private Sunny.UI.UIRadioButton uiRadioButton1;
+        private Sunny.UI.UILabel uiLabel1;
+        private Sunny.UI.UITextBox BBox;
+        private Sunny.UI.UILabel uiLabel3;
+        private Sunny.UI.UITextBox PBox;
+        private Sunny.UI.UILabel uiLabel2;
+        private Sunny.UI.UITextBox IBox;
+        private Sunny.UI.UILabel uiLabel4;
+        private Sunny.UI.UITextBox CBRBox;
+        private Sunny.UI.UILabel uiLabel5;
+        private Sunny.UI.UITextBox VBRBox;
+        private Sunny.UI.UIButton Save;
+        private Sunny.UI.UILabel uiLabel6;
+        private Sunny.UI.UIComboBox AudioMode;
+        private Sunny.UI.UILabel uiLabel7;
+        private Sunny.UI.UILabel uiLabel8;
+        private Sunny.UI.UITextBox AudioBox;
     }
 }

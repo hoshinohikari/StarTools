@@ -2,10 +2,11 @@
 using System.Configuration;
 using System.Security;
 using System.Windows.Forms;
+using Sunny.UI;
 
 namespace StarTools
 {
-    public partial class needed : Form
+    public partial class needed : UITitlePage
     {
         public needed()
         {
@@ -27,7 +28,7 @@ namespace StarTools
             }
             catch (ConfigurationErrorsException)
             {
-                Console.WriteLine("Error writing app settings");
+                Console.WriteLine(@"Error writing app settings");
             }
         }
 
@@ -40,7 +41,7 @@ namespace StarTools
                 if (appSettings["ffmpeg_file"] == null)
                 {
                     AddUpdateAppSettings("ffmpeg_file", "tool\\ffmpeg\\ffmpeg.exe");
-                    ffmpeg_file.Text = "tool\\ffmpeg\\ffmpeg.exe";
+                    ffmpeg_file.Text = @"tool\ffmpeg\ffmpeg.exe";
                 }
                 else
                 {
@@ -50,7 +51,7 @@ namespace StarTools
                 if (appSettings["NVEnc_file"] == null)
                 {
                     AddUpdateAppSettings("NVEnc_file", "tool\\HardEnc\\NVEncC64.exe");
-                    NVEnc_file.Text = "tool\\HardEnc\\NVEncC64.exe";
+                    NVEnc_file.Text = @"tool\HardEnc\NVEncC64.exe";
                 }
                 else
                 {
@@ -60,7 +61,7 @@ namespace StarTools
                 if (appSettings["QSVEnc_file"] == null)
                 {
                     AddUpdateAppSettings("QSVEnc_file", "tool\\HardEnc\\QSVEncC64.exe");
-                    QSVEnc_file.Text = "tool\\HardEnc\\QSVEncC64.exe";
+                    QSVEnc_file.Text = @"tool\HardEnc\QSVEncC64.exe";
                 }
                 else
                 {
@@ -70,7 +71,7 @@ namespace StarTools
                 if (appSettings["VCEEnc_file"] == null)
                 {
                     AddUpdateAppSettings("VCEEnc_file", "tool\\HardEnc\\VCEEncC64.exe");
-                    VCEEnc_file.Text = "tool\\HardEnc\\VCEEncC64.exe";
+                    VCEEnc_file.Text = @"tool\HardEnc\VCEEncC64.exe";
                 }
                 else
                 {
@@ -79,7 +80,7 @@ namespace StarTools
             }
             catch (ConfigurationErrorsException)
             {
-                Console.WriteLine("Error reading app settings");
+                Console.WriteLine(@"Error reading app settings");
             }
         }
 
@@ -90,22 +91,17 @@ namespace StarTools
             AddUpdateAppSettings("QSVEnc_file", QSVEnc_file.Text);
             AddUpdateAppSettings("VCEEnc_file", VCEEnc_file.Text);
 
-            MessageBox.Show("保存成功");
-            Close();
-        }
-
-        private void Backout_Click(object sender, EventArgs e)
-        {
+            MessageBox.Show(@"保存成功");
             Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var openFileDialog1 = new OpenFileDialog()
+            var openFileDialog1 = new OpenFileDialog
             {
                 FileName = "Select a video file",
-                Filter = "ffmpeg files|ffmpeg.exe|All files|*.*",
-                Title = "Open video file"
+                Filter = @"ffmpeg files|ffmpeg.exe|All files|*.*",
+                Title = @"Open video file"
             };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -122,11 +118,11 @@ namespace StarTools
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var openFileDialog1 = new OpenFileDialog()
+            var openFileDialog1 = new OpenFileDialog
             {
                 FileName = "Select a video file",
-                Filter = "NVEnc files|NVEncC64.exe|All files|*.*",
-                Title = "Open video file"
+                Filter = @"NVEnc files|NVEncC64.exe|All files|*.*",
+                Title = @"Open video file"
             };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -143,11 +139,11 @@ namespace StarTools
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var openFileDialog1 = new OpenFileDialog()
+            var openFileDialog1 = new OpenFileDialog
             {
                 FileName = "Select a video file",
-                Filter = "QSVEnc files|QSVEncC64.exe|All files|*.*",
-                Title = "Open video file"
+                Filter = @"QSVEnc files|QSVEncC64.exe|All files|*.*",
+                Title = @"Open video file"
             };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -164,11 +160,11 @@ namespace StarTools
 
         private void button4_Click(object sender, EventArgs e)
         {
-            var openFileDialog1 = new OpenFileDialog()
+            var openFileDialog1 = new OpenFileDialog
             {
                 FileName = "Select a video file",
-                Filter = "VCEEnc files|VCEEncC64.exe|All files|*.*",
-                Title = "Open video file"
+                Filter = @"VCEEnc files|VCEEncC64.exe|All files|*.*",
+                Title = @"Open video file"
             };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)

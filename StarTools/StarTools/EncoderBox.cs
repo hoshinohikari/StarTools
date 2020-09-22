@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Configuration;
 using System.Windows.Forms;
+using Sunny.UI;
 
-namespace VideoBox
+namespace StarTools
 {
-    public partial class EncoderSetting : Form
+    public partial class EncoderBox : UITitlePage
     {
-        public EncoderSetting()
+        public EncoderBox()
         {
             InitializeComponent();
         }
@@ -26,11 +27,11 @@ namespace VideoBox
             }
             catch (ConfigurationErrorsException)
             {
-                Console.WriteLine("Error writing app settings");
+                Console.WriteLine(@"Error writing app settings");
             }
         }
 
-        private void EncoderSetting_Load(object sender, EventArgs e)
+        private void EncoderBox_Load(object sender, EventArgs e)
         {
             try
             {
@@ -39,26 +40,58 @@ namespace VideoBox
                 switch (result)
                 {
                     case "1":
-                        radioButton1.Checked = true;
+                        uiRadioButton1.Checked = true;
                         break;
                     case "2":
-                        radioButton2.Checked = true;
+                        uiRadioButton2.Checked = true;
                         break;
                     case "3":
-                        radioButton3.Checked = true;
+                        uiRadioButton3.Checked = true;
                         break;
                     case "Not Found":
                         AddUpdateAppSettings("Code_rate_control_mode_selection", "1");
-                        radioButton1.Checked = true;
+                        uiRadioButton1.Checked = true;
                         break;
-                    default:
-                        break;
+                }
+
+                if (appSettings["Raws_audiomode"] == null)
+                {
+                    AddUpdateAppSettings("Raws_audiomode", "0");
+                    AudioMode.SelectedIndex = 0;
+                }
+                else
+                {
+                    switch (appSettings["Raws_audiomode"])
+                    {
+                        case "0":
+                            AudioMode.SelectedIndex = 0;
+                            AudioBox.Hide();
+                            uiLabel8.Hide();
+                            uiLabel7.Show();
+                            break;
+                        case "1":
+                            AudioMode.SelectedIndex = 1;
+                            AudioBox.Show();
+                            uiLabel8.Show();
+                            uiLabel7.Hide();
+                            break;
+                    }
+                }
+
+                if (appSettings["Raws_audiobit"] == null)
+                {
+                    AddUpdateAppSettings("Raws_audiobit", "192");
+                    AudioBox.Text = "192";
+                }
+                else
+                {
+                    AudioBox.Text = appSettings["Raws_audiobit"];
                 }
 
                 if (appSettings["I"] == null)
                 {
                     AddUpdateAppSettings("I", "24");
-                    IBox.Text = "24";
+                    IBox.Text = @"24";
                 }
                 else
                 {
@@ -68,7 +101,7 @@ namespace VideoBox
                 if (appSettings["P"] == null)
                 {
                     AddUpdateAppSettings("P", "26");
-                    PBox.Text = "26";
+                    PBox.Text = @"26";
                 }
                 else
                 {
@@ -78,7 +111,7 @@ namespace VideoBox
                 if (appSettings["B"] == null)
                 {
                     AddUpdateAppSettings("B", "27");
-                    BBox.Text = "27";
+                    BBox.Text = @"27";
                 }
                 else
                 {
@@ -88,7 +121,7 @@ namespace VideoBox
                 if (appSettings["CBR"] == null)
                 {
                     AddUpdateAppSettings("CBR", "3000");
-                    CBRBox.Text = "3000";
+                    CBRBox.Text = @"3000";
                 }
                 else
                 {
@@ -98,7 +131,7 @@ namespace VideoBox
                 if (appSettings["VBR"] == null)
                 {
                     AddUpdateAppSettings("VBR", "3000");
-                    VBRBox.Text = "3000";
+                    VBRBox.Text = @"3000";
                 }
                 else
                 {
@@ -107,68 +140,49 @@ namespace VideoBox
             }
             catch (ConfigurationErrorsException)
             {
-                Console.WriteLine("Error reading app settings");
+                Console.WriteLine(@"Error reading app settings");
             }
-
-            if (radioButton1.Checked)
-                FinBox.Text = " --cqp " + IBox.Text + ":" + PBox.Text + ":" + BBox.Text;
-            if (radioButton2.Checked)
-                FinBox.Text = " --cbr " + CBRBox.Text;
-            if (radioButton3.Checked)
-                FinBox.Text = " --vbr " + VBRBox.Text;
-            if (codeBox.Text != "")
-                FinBox.Text = FinBox.Text + " " + codeBox.Text;
-        }
-
-        private void Backout_Click(object sender, EventArgs e)
-        {
-            Close();
         }
 
         private void Save_Click(object sender, EventArgs e)
         {
-            if (radioButton1.Checked && !radioButton2.Checked && !radioButton3.Checked)
+            if (uiRadioButton1.Checked && !uiRadioButton2.Checked && !uiRadioButton3.Checked)
                 AddUpdateAppSettings("Code_rate_control_mode_selection", "1");
-            else if (!radioButton1.Checked && radioButton2.Checked && !radioButton3.Checked)
+            else if (!uiRadioButton1.Checked && uiRadioButton2.Checked && !uiRadioButton3.Checked)
                 AddUpdateAppSettings("Code_rate_control_mode_selection", "2");
-            else if (!radioButton1.Checked && !radioButton2.Checked && radioButton3.Checked)
+            else if (!uiRadioButton1.Checked && !uiRadioButton2.Checked && uiRadioButton3.Checked)
                 AddUpdateAppSettings("Code_rate_control_mode_selection", "3");
             else
-                MessageBox.Show("你他妈选不选");
+                MessageBox.Show(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
 
             AddUpdateAppSettings("I", IBox.Text);
             AddUpdateAppSettings("P", PBox.Text);
             AddUpdateAppSettings("B", BBox.Text);
             AddUpdateAppSettings("CBR", CBRBox.Text);
             AddUpdateAppSettings("VBR", VBRBox.Text);
-            AddUpdateAppSettings("Code", codeBox.Text);
+            AddUpdateAppSettings("Raws_audiobit", AudioBox.Text);
 
-            MessageBox.Show("保存成功");
-            Close();
+            UIMessageTip.ShowOk("保存成功");
         }
 
-        private void Box_TextChanged(object sender, EventArgs e)
+        private void AudioMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
-                FinBox.Text = " --cqp " + IBox.Text + ":" + PBox.Text + ":" + BBox.Text;
-            if (radioButton2.Checked)
-                FinBox.Text = " --cbr " + CBRBox.Text;
-            if (radioButton3.Checked)
-                FinBox.Text = " --vbr " + VBRBox.Text;
-            if (codeBox.Text != "")
-                FinBox.Text = FinBox.Text + " " + codeBox.Text;
-        }
-
-        private void radioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton1.Checked)
-                FinBox.Text = " --cqp " + IBox.Text + ":" + PBox.Text + ":" + BBox.Text;
-            if (radioButton2.Checked)
-                FinBox.Text = " --cbr " + CBRBox.Text;
-            if (radioButton3.Checked)
-                FinBox.Text = " --vbr " + VBRBox.Text;
-            if (codeBox.Text != "")
-                FinBox.Text = FinBox.Text + " " + codeBox.Text;
+            var appSettings = ConfigurationManager.AppSettings;
+            switch (AudioMode.SelectedIndex)
+            {
+                case 0:
+                    AddUpdateAppSettings("Raws_audiomode", "0");
+                    AudioBox.Hide();
+                    uiLabel8.Hide();
+                    uiLabel7.Show();
+                    break;
+                case 1:
+                    AddUpdateAppSettings("Raws_audiomode", "1");
+                    AudioBox.Show();
+                    uiLabel8.Show();
+                    uiLabel7.Hide();
+                    break;
+            }
         }
     }
 }

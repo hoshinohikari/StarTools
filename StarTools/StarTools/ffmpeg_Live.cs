@@ -3,32 +3,125 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Security;
 using System.Windows.Forms;
+using Sunny.UI;
 
-namespace VideoBox
+namespace StarTools
 {
-    public partial class ffmpeg_Live : Form
+    public partial class ffmpeg_Live : UITitlePage
     {
-        private void ffmpeg_Live_Load(object sender, EventArgs e)
-        {
-            comboBox1.SelectedIndex = 0;
-            AudioBox.Hide();
-            label7.Hide();
-            label8.Show();
-            AudioBox.Text = "192";
-        }
-
         public ffmpeg_Live()
         {
             InitializeComponent();
         }
 
-        private void OpenVideo_Click(object sender, EventArgs e)
+        private static void AddUpdateAppSettings(string key, string value)
         {
-            var openFileDialog1 = new OpenFileDialog()
+            try
+            {
+                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var settings = configFile.AppSettings.Settings;
+                if (settings[key] == null)
+                    settings.Add(key, value);
+                else
+                    settings[key].Value = value;
+                configFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine(@"Error writing app settings");
+            }
+        }
+
+        private void ffmpeg_Live_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+                if (appSettings["Live_audiomode"] == null)
+                {
+                    AddUpdateAppSettings("Live_audiomode", "0");
+                    AudioMode.SelectedIndex = 0;
+                }
+                else
+                {
+                    switch (appSettings["Live_audiomode"])
+                    {
+                        case "0":
+                            AudioMode.SelectedIndex = 0;
+                            AudioBox.Hide();
+                            uiLabel8.Hide();
+                            uiLabel7.Show();
+                            break;
+                        case "1":
+                            AudioMode.SelectedIndex = 1;
+                            AudioBox.Show();
+                            uiLabel8.Show();
+                            uiLabel7.Hide();
+                            break;
+                    }
+                }
+
+                if (appSettings["Live_audiobit"] == null)
+                {
+                    AddUpdateAppSettings("Live_audiobit", "192");
+                    AudioBox.Text = @"192";
+                }
+                else
+                {
+                    AudioBox.Text = appSettings["Live_audiobit"];
+                }
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine(@"Error reading app settings");
+            }
+        }
+
+        private void AudioMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (AudioMode.SelectedIndex)
+            {
+                case 0:
+                    AddUpdateAppSettings("Live_audiomode", "0");
+                    AudioBox.Hide();
+                    uiLabel8.Hide();
+                    uiLabel7.Show();
+                    break;
+                case 1:
+                    AddUpdateAppSettings("Live_audiomode", "1");
+                    AudioBox.Show();
+                    uiLabel8.Show();
+                    uiLabel7.Hide();
+                    break;
+            }
+        }
+
+        private void AudioBox_TextChanged(object sender, EventArgs e)
+        {
+            AddUpdateAppSettings("Live_audiobit", AudioBox.Text);
+        }
+
+        private void VideoFile_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Link;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void VideoFile_DragDrop(object sender, DragEventArgs e)
+        {
+            VideoFile.Text = ((Array) e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+        }
+
+        private void AddVideoFiles_Click(object sender, EventArgs e)
+        {
+            var openFileDialog1 = new OpenFileDialog
             {
                 FileName = "Select a video file",
-                Filter = "All video files (*.mp4;*.mkv;*.flv;*.m2ts;*.ts)|*.mp4;*.mkv;*.flv;*.m2ts;*.ts",
-                Title = "Open video file"
+                Filter = @"All video files (*.mp4;*.mkv;*.flv;*.m2ts;*.ts)|*.mp4;*.mkv;*.flv;*.m2ts;*.ts",
+                Title = @"Open video file"
             };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -46,21 +139,21 @@ namespace VideoBox
         private void Live_Click(object sender, EventArgs e)
         {
             var appSettings = ConfigurationManager.AppSettings;
-            if (VideoFile.Text == "")
+            if (VideoFile.Text == @"请输入视频文件")
             {
-                MessageBox.Show("请放入源文件!");
+                this.ShowErrorDialog(@"请放入源文件!");
                 return;
             }
 
             if (RTMP.Text == "")
             {
-                MessageBox.Show("请输入RTMP地址!");
+                this.ShowErrorDialog(@"请输入RTMP地址!");
                 return;
             }
 
             if (LiveCode.Text == "")
             {
-                MessageBox.Show("请输入直播码!");
+                this.ShowErrorDialog(@"请输入直播码!");
                 return;
             }
 
@@ -73,7 +166,7 @@ namespace VideoBox
             p.StartInfo.CreateNoWindow = false;
 
             p.Start();
-            switch (comboBox1.SelectedIndex)
+            switch (AudioMode.SelectedIndex)
             {
                 case 0:
                     p.StandardInput.WriteLine(appSettings["ffmpeg_file"] + " -re -i \"" + VideoFile.Text +
@@ -89,41 +182,6 @@ namespace VideoBox
                                               "\"");
                     break;
             }
-        }
-
-        private void Backout_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (comboBox1.SelectedIndex)
-            {
-                case 0:
-                    AudioBox.Hide();
-                    label7.Hide();
-                    label8.Show();
-                    break;
-                case 1:
-                    AudioBox.Show();
-                    label7.Show();
-                    label8.Hide();
-                    break;
-            }
-        }
-
-        private void VideoFile_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Link;
-            else
-                e.Effect = DragDropEffects.None;
-        }
-
-        private void VideoFile_DragDrop(object sender, DragEventArgs e)
-        {
-            VideoFile.Text = ((Array) e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
         }
     }
 }
