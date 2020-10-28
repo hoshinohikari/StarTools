@@ -124,6 +124,8 @@ namespace StarTools
 
         private void Rawslist_ItemClick(object sender, EventArgs e)
         {
+            var index = 0;
+            var j = 0;
             var openWith = new Dictionary<string, string>
             {
                 {"h26", ".h264"},
@@ -134,13 +136,28 @@ namespace StarTools
                 {"pcm", ".wav"},
                 {"fla", ".flac"},
                 {"hev", ".hevc"}
+                //TODO: 开放设置，可以手动选择
             };
             if (Rawslist.SelectedIndex != -1)
             {
                 track_num = Rawslist.SelectedItem.ToString()
                     .Substring(Rawslist.SelectedItem.ToString().IndexOf("Stream #", StringComparison.Ordinal) + 8, 3);
-                track_kinds = Rawslist.SelectedItem.ToString()
-                    .Substring(Rawslist.SelectedItem.ToString().IndexOf(":", 22, StringComparison.Ordinal) + 2, 3);
+                while(true)
+                {
+                    index = Rawslist.SelectedItem.ToString().IndexOf(":", index, StringComparison.Ordinal);
+                    if (j == 2)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        index = Rawslist.SelectedItem.ToString().IndexOf(":", index + 1, StringComparison.Ordinal);
+                    }
+
+                    j++;
+                }
+
+                track_kinds = Rawslist.SelectedItem.ToString().Substring(index + 2, 3);
                 OutputFile.Text =
                     VideoFile.Text.Substring(0, VideoFile.Text.LastIndexOf(".", StringComparison.Ordinal)) +
                     @"_demux_" +

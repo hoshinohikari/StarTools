@@ -34,6 +34,24 @@ namespace StarTools
             }
         }
 
+        /*private delegate void SetPos(int ipos, string vinfo);//代理
+
+        private void SetTextMesssage(int ipos, string vinfo)
+        {
+            if (this.InvokeRequired)
+            {
+                SetPos setpos = new SetPos(SetTextMesssage);
+                this.Invoke(setpos, new object[] { ipos, vinfo });
+            }
+            else
+            {
+                this.label1.Text = ipos.ToString() + "/1000";
+                this.progressBar1.Value = Convert.ToInt32(ipos);
+                this.textBox1.AppendText(vinfo);
+            }
+        }*/
+        //TODO: 多线程进度条与进度框显示
+
         private void Encode_Load(object sender, EventArgs e)
         {
             try
@@ -166,6 +184,7 @@ namespace StarTools
             p.StartInfo.RedirectStandardOutput = false;
             p.StartInfo.RedirectStandardError = false;
             p.StartInfo.CreateNoWindow = false;
+            //TODO: 改变按钮行为，隐藏cmd界面
             var encoderWith = new Dictionary<int, string>
             {
                 {0, appSettings["QSVEnc_file"]},
@@ -192,7 +211,7 @@ namespace StarTools
 
             AddUpdateAppSettings("EncoderBox_selected", EncoderBox.SelectedIndex.ToString());
             string cmdLine;
-            if (AssFile.Text != "")
+            if (AssFile.Text != @"请输入字幕文件")
             {
                 string temp;
                 temp = AssFile.Text;
@@ -208,7 +227,7 @@ namespace StarTools
                 if (EncoderBox.SelectedIndex == 1)
                     cmdLine = appSettings["NVEnc_file"] + " --avhw -i \"" + VideoFile.Text +
                               "\" --audio-codec aac --vpp-subburn filename=\"" +
-                              AssFile.Text + "\"";
+                              AssFile.Text + "\",charcode=utf-8,shaping=complex";
                 else
                     cmdLine = appSettings["ffmpeg_file"] + " -y -i \"" + VideoFile.Text +
                               "\" -vf \"ass=" + temp +

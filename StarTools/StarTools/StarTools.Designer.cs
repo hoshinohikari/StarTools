@@ -55,9 +55,11 @@
             // 
             // StarTools
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(908, 558);
+            this.MaximizeBox = false;
             this.Name = "StarTools";
             this.Text = "StarTools";
             this.Load += new System.EventHandler(this.StarTools_Load);
