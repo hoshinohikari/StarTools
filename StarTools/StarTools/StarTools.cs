@@ -89,7 +89,7 @@ namespace StarTools
                     break;
                 case 2:
                     Aside.Nodes.Clear();
-                    Aside.CreateNode(AddPage(new needed()), 61451, 24);
+                    Aside.CreateNode(AddPage(new Needed()), 61451, 24);
                     Aside.SelectFirst();
                     break;
             }

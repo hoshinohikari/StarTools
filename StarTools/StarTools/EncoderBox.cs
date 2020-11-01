@@ -81,7 +81,7 @@ namespace StarTools
                 if (appSettings["Raws_audiobit"] == null)
                 {
                     AddUpdateAppSettings("Raws_audiobit", "192");
-                    AudioBox.Text = "192";
+                    AudioBox.Text = @"192";
                 }
                 else
                 {
@@ -167,7 +167,6 @@ namespace StarTools
 
         private void AudioMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var appSettings = ConfigurationManager.AppSettings;
             switch (AudioMode.SelectedIndex)
             {
                 case 0:

@@ -6,9 +6,9 @@ using Sunny.UI;
 
 namespace StarTools
 {
-    public partial class needed : UITitlePage
+    public partial class Needed : UITitlePage
     {
-        public needed()
+        public Needed()
         {
             InitializeComponent();
         }

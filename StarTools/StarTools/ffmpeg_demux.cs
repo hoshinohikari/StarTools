@@ -11,7 +11,7 @@ namespace StarTools
 {
     public partial class ffmpeg_demux : UITitlePage
     {
-        private string track_num, track_kinds;
+        private string _trackNum, _trackKinds;
 
         public ffmpeg_demux()
         {
@@ -117,7 +117,7 @@ namespace StarTools
             p.StartInfo.RedirectStandardError = false;
             p.StartInfo.CreateNoWindow = false;
             p.Start();
-            p.StandardInput.WriteLine(appSettings["ffmpeg_file"] + " -i \"" + VideoFile.Text + "\" -map " + track_num +
+            p.StandardInput.WriteLine(appSettings["ffmpeg_file"] + " -i \"" + VideoFile.Text + "\" -map " + _trackNum +
                                       " -codec copy \"" +
                                       OutputFile.Text + "\"");
         }
@@ -140,29 +140,24 @@ namespace StarTools
             };
             if (Rawslist.SelectedIndex != -1)
             {
-                track_num = Rawslist.SelectedItem.ToString()
+                _trackNum = Rawslist.SelectedItem.ToString()
                     .Substring(Rawslist.SelectedItem.ToString().IndexOf("Stream #", StringComparison.Ordinal) + 8, 3);
-                while(true)
+                while (true)
                 {
                     index = Rawslist.SelectedItem.ToString().IndexOf(":", index, StringComparison.Ordinal);
                     if (j == 2)
-                    {
                         break;
-                    }
-                    else
-                    {
-                        index = Rawslist.SelectedItem.ToString().IndexOf(":", index + 1, StringComparison.Ordinal);
-                    }
+                    index = Rawslist.SelectedItem.ToString().IndexOf(":", index + 1, StringComparison.Ordinal);
 
                     j++;
                 }
 
-                track_kinds = Rawslist.SelectedItem.ToString().Substring(index + 2, 3);
+                _trackKinds = Rawslist.SelectedItem.ToString().Substring(index + 2, 3);
                 OutputFile.Text =
                     VideoFile.Text.Substring(0, VideoFile.Text.LastIndexOf(".", StringComparison.Ordinal)) +
                     @"_demux_" +
                     Rawslist.SelectedIndex +
-                    openWith[track_kinds];
+                    openWith[_trackKinds];
             }
         }
     }

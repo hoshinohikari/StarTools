@@ -99,6 +99,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="CmdUtils.cs" />
     <Compile Include="ffmpeg_demux.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +117,18 @@
     </Compile>
     <Compile Include="needed.Designer.cs">
       <DependentUpon>needed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rip_cmd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="rip_cmd.Designer.cs">
+      <DependentUpon>rip_cmd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="run_rip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="run_rip.Designer.cs">
+      <DependentUpon>run_rip.cs</DependentUpon>
     </Compile>
     <Compile Include="StarTools.cs">
       <SubType>Form</SubType>
@@ -154,6 +167,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="needed.resx">
       <DependentUpon>needed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rip_cmd.resx">
+      <DependentUpon>rip_cmd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="run_rip.resx">
+      <DependentUpon>run_rip.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StarTools.resx">
       <DependentUpon>StarTools.cs</DependentUpon>

@@ -1,6 +1,6 @@
 ﻿namespace StarTools
 {
-    partial class needed
+    partial class Needed
     {
         /// <summary>
         /// Required designer variable.
@@ -300,7 +300,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(658, 413);
-            this.Name = "needed";
+            this.Name = "Needed";
             this.Text = "依赖管理器";
             this.Load += new System.EventHandler(this.needed_Load);
             this.PagePanel.ResumeLayout(false);

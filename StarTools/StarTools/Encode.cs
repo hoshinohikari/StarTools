@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using System.Security;
 using System.Windows.Forms;
 using Sunny.UI;
@@ -33,24 +32,6 @@ namespace StarTools
                 Console.WriteLine(@"Error writing app settings");
             }
         }
-
-        /*private delegate void SetPos(int ipos, string vinfo);//代理
-
-        private void SetTextMesssage(int ipos, string vinfo)
-        {
-            if (this.InvokeRequired)
-            {
-                SetPos setpos = new SetPos(SetTextMesssage);
-                this.Invoke(setpos, new object[] { ipos, vinfo });
-            }
-            else
-            {
-                this.label1.Text = ipos.ToString() + "/1000";
-                this.progressBar1.Value = Convert.ToInt32(ipos);
-                this.textBox1.AppendText(vinfo);
-            }
-        }*/
-        //TODO: 多线程进度条与进度框显示
 
         private void Encode_Load(object sender, EventArgs e)
         {
@@ -176,15 +157,7 @@ namespace StarTools
 
         private void rip_Click(object sender, EventArgs e)
         {
-            var p = new Process();
             var appSettings = ConfigurationManager.AppSettings;
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardInput = true;
-            p.StartInfo.RedirectStandardOutput = false;
-            p.StartInfo.RedirectStandardError = false;
-            p.StartInfo.CreateNoWindow = false;
-            //TODO: 改变按钮行为，隐藏cmd界面
             var encoderWith = new Dictionary<int, string>
             {
                 {0, appSettings["QSVEnc_file"]},
@@ -211,6 +184,7 @@ namespace StarTools
 
             AddUpdateAppSettings("EncoderBox_selected", EncoderBox.SelectedIndex.ToString());
             string cmdLine;
+            string argLine;
             if (AssFile.Text != @"请输入字幕文件")
             {
                 string temp;
@@ -225,22 +199,29 @@ namespace StarTools
                 };
 
                 if (EncoderBox.SelectedIndex == 1)
-                    cmdLine = appSettings["NVEnc_file"] + " --avhw -i \"" + VideoFile.Text +
+                {
+                    cmdLine = appSettings["NVEnc_file"];
+                    argLine = " --avhw -i \"" + VideoFile.Text +
                               "\" --audio-codec aac --vpp-subburn filename=\"" +
                               AssFile.Text + "\",charcode=utf-8,shaping=complex";
+                }
                 else
-                    cmdLine = appSettings["ffmpeg_file"] + " -y -i \"" + VideoFile.Text +
+                {
+                    cmdLine = appSettings["ffmpeg_file"];
+                    argLine = " -y -i \"" + VideoFile.Text +
                               "\" -vf \"ass=" + temp +
                               "\" -codec:a copy -codec:v rawvideo -pix_fmt yuv420p -f nut - | " +
                               ffmpegWith[EncoderBox.SelectedIndex] + " --avsw -i -";
+                }
             }
             else
             {
-                cmdLine = encoderWith[EncoderBox.SelectedIndex] + " --avhw -i \"" + VideoFile.Text +
+                cmdLine = encoderWith[EncoderBox.SelectedIndex];
+                argLine = " --avhw -i \"" + VideoFile.Text +
                           "\"";
             }
 
-            cmdLine = cmdLine + audioWith[appSettings["Raws_audiomode"]];
+            argLine = argLine + audioWith[appSettings["Raws_audiomode"]];
 
             try
             {
@@ -254,7 +235,7 @@ namespace StarTools
                     {"2", " --cbr " + appSettings["CBR"]},
                     {"3", " --vbr " + appSettings["VBR"]}
                 };
-                cmdLine = cmdLine + bitWith[appSettings["Code_rate_control_mode_selection"]];
+                argLine = argLine + bitWith[appSettings["Code_rate_control_mode_selection"]];
             }
             catch (Exception exception)
             {
@@ -263,17 +244,18 @@ namespace StarTools
             }
 
             if (uiCheckBox1.Checked)
-                cmdLine = cmdLine + " --interlace tff --vpp-deinterlace normal";
+                argLine = argLine + " --interlace tff --vpp-deinterlace normal";
 
             if (uiCheckBox2.Checked)
-                cmdLine = cmdLine + " --output-res " + WBox.Text + "x" + HBox.Text;
+                argLine = argLine + " --output-res " + WBox.Text + "x" + HBox.Text;
 
-            if (appSettings["Code"] != null && appSettings["Code"] != "") cmdLine = cmdLine + appSettings["Code"];
+            if (appSettings["Code"] != null && appSettings["Code"] != "") argLine = argLine + appSettings["Code"];
 
-            cmdLine = cmdLine + " -o \"" + OutputFile.Text + "\"";
+            argLine = argLine + " -o \"" + OutputFile.Text + "\"";
 
-            p.Start();
-            p.StandardInput.WriteLine(cmdLine);
+            var f = new RunRip(cmdLine, argLine);
+            f.ShowDialog();
+            f.Dispose();
         }
     }
 }
