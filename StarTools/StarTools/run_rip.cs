@@ -24,8 +24,7 @@ namespace StarTools
 
         private void run_rip_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var r = MainTabControl.TabPages[0].Controls[0] as RipCmd;
-            if (r != null && r.uiProcessBar1.Value != 100)
+            if (MainTabControl.TabPages[0].Controls[0] is RipCmd r && r.uiProcessBar1.Value != 100)
             {
                 if (this.ShowAskDialog("转换未完成，确认要退出吗"))
                     RipCmd.StopCmd();

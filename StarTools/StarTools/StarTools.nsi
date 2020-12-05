@@ -3,7 +3,7 @@
 
 ; 安装程序初始定义常量
 !define PRODUCT_NAME "StarTools"
-!define PRODUCT_VERSION "0.4"
+!define PRODUCT_VERSION "0.5"
 !define PRODUCT_PUBLISHER "HoshinoKun"
 !define PRODUCT_WEB_SITE "https://www.346pro.club"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\StarTools.exe"
@@ -60,6 +60,23 @@ Section "必要组件" SEC01
   CreateShortCut "$DESKTOP\StarTools.lnk" "$INSTDIR\StarTools.exe"
   SetOutPath "$INSTDIR\tool\ffmpeg"
   File "bin\x64\Release\tool\ffmpeg\ffmpeg.exe"
+  SetOutPath "$INSTDIR\tool\MP4Box"
+  File "bin\x64\Release\tool\MP4Box\avcodec-58.dll"
+  File "bin\x64\Release\tool\MP4Box\avdevice-58.dll"
+  File "bin\x64\Release\tool\MP4Box\avfilter-7.dll"
+  File "bin\x64\Release\tool\MP4Box\avformat-58.dll"
+  File "bin\x64\Release\tool\MP4Box\avutil-56.dll"
+  File "bin\x64\Release\tool\MP4Box\libcryptoMD.dll"
+  File "bin\x64\Release\tool\MP4Box\libgpac.dll"
+  File "bin\x64\Release\tool\MP4Box\libsslMD.dll"
+  File "bin\x64\Release\tool\MP4Box\libx264-142.dll"
+  File "bin\x64\Release\tool\MP4Box\mp4box.exe"
+  File "bin\x64\Release\tool\MP4Box\OpenSVCDecoder.dll"
+  File "bin\x64\Release\tool\MP4Box\postproc-55.dll"
+  File "bin\x64\Release\tool\MP4Box\swresample-3.dll"
+  File "bin\x64\Release\tool\MP4Box\swscale-5.dll"
+  SetOutPath "$INSTDIR\tool\mkvmerge"
+  File "bin\x64\Release\tool\mkvmerge\mkvmerge.exe"
 SectionEnd
 
 Section "Intel" SEC02

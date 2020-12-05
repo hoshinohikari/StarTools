@@ -41,10 +41,7 @@ namespace StarTools
 
         private void VideoFile_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Link;
-            else
-                e.Effect = DragDropEffects.None;
+            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Link : DragDropEffects.None;
         }
 
         private void VideoFile_DragDrop(object sender, DragEventArgs e)
@@ -56,13 +53,18 @@ namespace StarTools
         {
             var appSettings = ConfigurationManager.AppSettings;
             Rawslist.Items.Clear();
-            var p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardInput = true;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.CreateNoWindow = true;
+            var p = new Process
+            {
+                StartInfo =
+                {
+                    FileName = "cmd.exe",
+                    UseShellExecute = false,
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                }
+            };
             p.Start();
             p.StandardInput.WriteLine(appSettings["ffmpeg_file"] + " -i \"" + VideoFile.Text + "\"");
             p.StandardInput.AutoFlush = true;
@@ -109,13 +111,18 @@ namespace StarTools
         {
             var appSettings = ConfigurationManager.AppSettings;
             File.Delete(OutputFile.Text);
-            var p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardInput = true;
-            p.StartInfo.RedirectStandardOutput = false;
-            p.StartInfo.RedirectStandardError = false;
-            p.StartInfo.CreateNoWindow = false;
+            var p = new Process
+            {
+                StartInfo =
+                {
+                    FileName = "cmd.exe",
+                    UseShellExecute = false,
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = false,
+                    RedirectStandardError = false,
+                    CreateNoWindow = false
+                }
+            };
             p.Start();
             p.StandardInput.WriteLine(appSettings["ffmpeg_file"] + " -i \"" + VideoFile.Text + "\" -map " + _trackNum +
                                       " -codec copy \"" +

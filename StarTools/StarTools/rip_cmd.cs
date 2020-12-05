@@ -15,8 +15,7 @@ namespace StarTools
             InitializeComponent();
             _line = cmdLine;
             _arg = argLine;
-            _thread = new Thread(Init_cmd);
-            _thread.IsBackground = true;
+            _thread = new Thread(Init_cmd) {IsBackground = true};
             _thread.Start();
         }
 

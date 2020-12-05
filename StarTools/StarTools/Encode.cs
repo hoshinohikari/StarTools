@@ -187,8 +187,7 @@ namespace StarTools
             string argLine;
             if (AssFile.Text != @"请输入字幕文件")
             {
-                string temp;
-                temp = AssFile.Text;
+                var temp = AssFile.Text;
                 temp = temp.Replace("\\", "\\\\\\\\");
                 temp = temp.Insert(temp.IndexOf(":", StringComparison.Ordinal), "\\\\");
                 var ffmpegWith = new Dictionary<int, string>

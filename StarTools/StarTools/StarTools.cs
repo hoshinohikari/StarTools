@@ -48,6 +48,12 @@ namespace StarTools
                 if (appSettings["VCEEnc_file"] == null)
                     AddUpdateAppSettings("VCEEnc_file", "tool\\HardEnc\\VCEEncC64.exe");
 
+                if (appSettings["MP4Box_file"] == null)
+                    AddUpdateAppSettings("MP4Box_file", "tool\\MP4Box\\mp4box.exe");
+
+                if (appSettings["mkvmerge_file"] == null)
+                    AddUpdateAppSettings("mkvmerge_file", "tool\\mkvmerge\\mkvmerge.exe");
+
                 if (appSettings["Code_rate_control_mode_selection"] == null)
                     AddUpdateAppSettings("Code_rate_control_mode_selection", "1");
 
@@ -85,7 +91,7 @@ namespace StarTools
                     Aside.Nodes.Clear();
                     Aside.CreateNode(AddPage(new ffmpeg_Live()), 61451, 24);
                     Aside.CreateNode(AddPage(new ffmpeg_demux()), 61451, 24);
-                    Aside.CreateNode(AddPage(new ffmpeg_mux()), 61451, 24);
+                    Aside.CreateNode(AddPage(new Mux()), 61451, 24);
                     //TODO: 增加封装功能
                     //Aside.CreateNode(AddPage(new ffmpeg_mux()), 61451, 24);
                     Aside.SelectFirst();

@@ -181,10 +181,7 @@ namespace StarTools
 
         private void file_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Link;
-            else
-                e.Effect = DragDropEffects.None;
+            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Link : DragDropEffects.None;
         }
 
         private void ffmpeg_file_DragDrop(object sender, DragEventArgs e)

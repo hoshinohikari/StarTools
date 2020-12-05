@@ -112,11 +112,11 @@
     <Compile Include="ffmpeg_Live.Designer.cs">
       <DependentUpon>ffmpeg_Live.cs</DependentUpon>
     </Compile>
-    <Compile Include="ffmpeg_mux.cs">
+    <Compile Include="Mux.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ffmpeg_mux.Designer.cs">
-      <DependentUpon>ffmpeg_mux.cs</DependentUpon>
+    <Compile Include="Mux.Designer.cs">
+      <DependentUpon>Mux.cs</DependentUpon>
     </Compile>
     <Compile Include="needed.cs">
       <SubType>Form</SubType>
@@ -171,8 +171,8 @@
     <EmbeddedResource Include="ffmpeg_Live.resx">
       <DependentUpon>ffmpeg_Live.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ffmpeg_mux.resx">
-      <DependentUpon>ffmpeg_mux.cs</DependentUpon>
+    <EmbeddedResource Include="Mux.resx">
+      <DependentUpon>Mux.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="needed.resx">
       <DependentUpon>needed.cs</DependentUpon>

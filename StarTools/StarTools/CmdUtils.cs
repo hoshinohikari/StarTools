@@ -13,14 +13,16 @@ namespace StarTools
         {
             shell = shell + arg;
             _cmd = new Process();
-            var startInfo = new ProcessStartInfo();
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "";
-            startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardInput = true;
-            startInfo.RedirectStandardOutput = true;
-            startInfo.RedirectStandardError = true;
-            startInfo.CreateNoWindow = true;
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = "cmd.exe",
+                Arguments = "",
+                UseShellExecute = false,
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            };
             _cmd.StartInfo = startInfo;
 
             if (_cmd.Start())
@@ -46,7 +48,7 @@ namespace StarTools
         //TODO: 函数功能分离，创建其他页面使用的窗口
         private void updateLog(RipCmd cmd, string log)
         {
-            UpdateLog set = delegate
+            void Set()
             {
                 if (_exe == "") _exe = log.Substring(0, 5) == "ffmpe" ? "ffmpe" : "enc";
                 cmd.uiRichTextBox1.AppendText(log);
@@ -79,8 +81,9 @@ namespace StarTools
                 {
                     // ignored
                 }
-            };
-            cmd.Invoke(set);
+            }
+
+            cmd.Invoke((UpdateLog) Set);
         }
 
         public void CloseCmd()
