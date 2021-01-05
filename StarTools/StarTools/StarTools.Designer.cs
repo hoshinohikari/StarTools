@@ -31,6 +31,7 @@
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("压制");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("工具");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("高级");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StarTools));
             this.SuspendLayout();
             // 
             // Aside
@@ -59,6 +60,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(908, 558);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "StarTools";
             this.Text = "StarTools";

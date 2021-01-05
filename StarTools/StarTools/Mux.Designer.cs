@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Mux));
             this.uiTabControl1 = new Sunny.UI.UITabControl();
             this.mp4Page = new System.Windows.Forms.TabPage();
             this.SaveFile = new Sunny.UI.UISymbolButton();
@@ -617,6 +618,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(658, 413);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Mux";
             this.Text = "封装";
             this.PagePanel.ResumeLayout(false);

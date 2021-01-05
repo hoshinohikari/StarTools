@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Needed));
             this.button2 = new Sunny.UI.UISymbolButton();
             this.button3 = new Sunny.UI.UISymbolButton();
             this.button1 = new Sunny.UI.UISymbolButton();
@@ -295,11 +296,12 @@
             this.Save.Text = "保存";
             this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
-            // needed
+            // Needed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(658, 413);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Needed";
             this.Text = "依赖管理器";
             this.Load += new System.EventHandler(this.needed_Load);

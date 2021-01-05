@@ -3,7 +3,7 @@
 
 ; 安装程序初始定义常量
 !define PRODUCT_NAME "StarTools"
-!define PRODUCT_VERSION "0.5"
+!define PRODUCT_VERSION "0.52"
 !define PRODUCT_PUBLISHER "HoshinoKun"
 !define PRODUCT_WEB_SITE "https://www.346pro.club"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\StarTools.exe"

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
-using System.Security;
 using System.Windows.Forms;
 using Sunny.UI;
 
@@ -20,23 +19,7 @@ namespace StarTools
 
         private void AddVideoFiles_Click(object sender, EventArgs e)
         {
-            var openFileDialog1 = new OpenFileDialog
-            {
-                FileName = "Select a video file",
-                Filter = @"All video files (*.mp4;*.mkv;*.flv;*.m2ts;*.ts)|*.mp4;*.mkv;*.flv;*.m2ts;*.ts",
-                Title = @"Open video file"
-            };
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                try
-                {
-                    VideoFile.Text = openFileDialog1.FileName;
-                }
-                catch (SecurityException ex)
-                {
-                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                                    $"Details:\n\n{ex.StackTrace}");
-                }
+            VideoFile.Text = FileDo.GetVideoFile("请输入视频文件");
         }
 
         private void VideoFile_DragEnter(object sender, DragEventArgs e)
@@ -87,24 +70,7 @@ namespace StarTools
 
         private void SaveFile_Click(object sender, EventArgs e)
         {
-            var saveFileDialog1 = new SaveFileDialog
-            {
-                FileName = "Output",
-                Filter = @"Mp4 files (*.mp4)|*.mp4",
-                Title = @"Save a mp4 file"
-            };
-
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                try
-                {
-                    var filePath = saveFileDialog1.FileName;
-                    OutputFile.Text = filePath;
-                }
-                catch (SecurityException ex)
-                {
-                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                                    $"Details:\n\n{ex.StackTrace}");
-                }
+            OutputFile.Text = FileDo.GetSaveFiles("mp4");
         }
 
         private void demux_Click(object sender, EventArgs e)
@@ -145,27 +111,25 @@ namespace StarTools
                 {"hev", ".hevc"}
                 //TODO: 开放设置，可以手动选择
             };
-            if (Rawslist.SelectedIndex != -1)
+            if (Rawslist.SelectedIndex == -1) return;
+            _trackNum = Rawslist.SelectedItem.ToString()
+                .Substring(Rawslist.SelectedItem.ToString().IndexOf("Stream #", StringComparison.Ordinal) + 8, 3);
+            while (true)
             {
-                _trackNum = Rawslist.SelectedItem.ToString()
-                    .Substring(Rawslist.SelectedItem.ToString().IndexOf("Stream #", StringComparison.Ordinal) + 8, 3);
-                while (true)
-                {
-                    index = Rawslist.SelectedItem.ToString().IndexOf(":", index, StringComparison.Ordinal);
-                    if (j == 2)
-                        break;
-                    index = Rawslist.SelectedItem.ToString().IndexOf(":", index + 1, StringComparison.Ordinal);
+                index = Rawslist.SelectedItem.ToString().IndexOf(":", index, StringComparison.Ordinal);
+                if (j == 2)
+                    break;
+                index = Rawslist.SelectedItem.ToString().IndexOf(":", index + 1, StringComparison.Ordinal);
 
-                    j++;
-                }
-
-                _trackKinds = Rawslist.SelectedItem.ToString().Substring(index + 2, 3);
-                OutputFile.Text =
-                    VideoFile.Text.Substring(0, VideoFile.Text.LastIndexOf(".", StringComparison.Ordinal)) +
-                    @"_demux_" +
-                    Rawslist.SelectedIndex +
-                    openWith[_trackKinds];
+                j++;
             }
+
+            _trackKinds = Rawslist.SelectedItem.ToString().Substring(index + 2, 3);
+            OutputFile.Text =
+                VideoFile.Text.Substring(0, VideoFile.Text.LastIndexOf(".", StringComparison.Ordinal)) +
+                @"_demux_" +
+                Rawslist.SelectedIndex +
+                openWith[_trackKinds];
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.Diagnostics;
-using System.Security;
 using System.Windows.Forms;
 using Sunny.UI;
 
@@ -59,6 +58,9 @@ namespace StarTools
                             uiLabel8.Show();
                             uiLabel7.Hide();
                             break;
+                        default:
+                            this.ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
+                            break;
                     }
                 }
 
@@ -94,6 +96,9 @@ namespace StarTools
                     uiLabel8.Show();
                     uiLabel7.Hide();
                     break;
+                default:
+                    this.ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
+                    break;
             }
         }
 
@@ -114,23 +119,7 @@ namespace StarTools
 
         private void AddVideoFiles_Click(object sender, EventArgs e)
         {
-            var openFileDialog1 = new OpenFileDialog
-            {
-                FileName = "Select a video file",
-                Filter = @"All video files (*.mp4;*.mkv;*.flv;*.m2ts;*.ts)|*.mp4;*.mkv;*.flv;*.m2ts;*.ts",
-                Title = @"Open video file"
-            };
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                try
-                {
-                    VideoFile.Text = openFileDialog1.FileName;
-                }
-                catch (SecurityException ex)
-                {
-                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                                    $"Details:\n\n{ex.StackTrace}");
-                }
+            VideoFile.Text = FileDo.GetVideoFile("请输入视频文件");
         }
 
         private void Live_Click(object sender, EventArgs e)
@@ -182,6 +171,9 @@ namespace StarTools
                                               "k -f flv -flvflags no_duration_filesize \"" +
                                               RTMP.Text + LiveCode.Text +
                                               "\"");
+                    break;
+                default:
+                    this.ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
                     break;
             }
         }

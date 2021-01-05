@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ffmpeg_demux));
             this.AddVideoFiles = new Sunny.UI.UISymbolButton();
             this.VideoFile = new Sunny.UI.UITextBox();
             this.uiLabel1 = new Sunny.UI.UILabel();
@@ -198,6 +199,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(658, 413);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ffmpeg_demux";
             this.Text = "解封装";
             this.PagePanel.ResumeLayout(false);

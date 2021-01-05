@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Security;
 using System.Windows.Forms;
 using Sunny.UI;
 
@@ -63,66 +62,17 @@ namespace StarTools
 
         private void AddVideoFiles_Click(object sender, EventArgs e)
         {
-            var openFileDialog1 = new OpenFileDialog
-            {
-                FileName = "Select a video file",
-                Filter = @"All video files (*.mp4;*.mkv;*.flv;*.m2ts;*.ts)|*.mp4;*.mkv;*.flv;*.m2ts;*.ts",
-                Title = @"Open video file"
-            };
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                try
-                {
-                    VideoFile.Text = openFileDialog1.FileName;
-                }
-                catch (SecurityException ex)
-                {
-                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                                    $"Details:\n\n{ex.StackTrace}");
-                }
+            VideoFile.Text = FileDo.GetVideoFile("请输入视频文件");
         }
 
         private void AddAssFiles_Click(object sender, EventArgs e)
         {
-            var openFileDialog1 = new OpenFileDialog
-            {
-                FileName = "Select a ass file",
-                Filter = @"Ass files (*.ass)|*.ass",
-                Title = @"Open ass file"
-            };
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                try
-                {
-                    AssFile.Text = openFileDialog1.FileName;
-                }
-                catch (SecurityException ex)
-                {
-                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                                    $"Details:\n\n{ex.StackTrace}");
-                }
+            AssFile.Text = FileDo.GetAssFile("请输入字幕文件");
         }
 
         private void SaveFile_Click(object sender, EventArgs e)
         {
-            var saveFileDialog1 = new SaveFileDialog
-            {
-                FileName = "Output",
-                Filter = @"Mp4 files (*.mp4)|*.mp4",
-                Title = @"Save a mp4 file"
-            };
-
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                try
-                {
-                    var filePath = saveFileDialog1.FileName;
-                    OutputFile.Text = filePath;
-                }
-                catch (SecurityException ex)
-                {
-                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                                    $"Details:\n\n{ex.StackTrace}");
-                }
+            OutputFile.Text = FileDo.GetSaveFiles("mp4");
         }
 
         private void VideoFile_TextChanged(object sender, EventArgs e)
@@ -140,14 +90,14 @@ namespace StarTools
             }
         }
 
-        private void AssFile_DragDrop(object sender, DragEventArgs e)
-        {
-            AssFile.Text = ((Array) e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
-        }
-
         private void File_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Link : DragDropEffects.None;
+        }
+
+        private void AssFile_DragDrop(object sender, DragEventArgs e)
+        {
+            AssFile.Text = ((Array) e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
         }
 
         private void VideoFile_DragDrop(object sender, DragEventArgs e)
@@ -220,7 +170,7 @@ namespace StarTools
                           "\"";
             }
 
-            argLine = argLine + audioWith[appSettings["Raws_audiomode"]];
+            argLine += audioWith[appSettings["Raws_audiomode"]];
 
             try
             {
@@ -234,7 +184,7 @@ namespace StarTools
                     {"2", " --cbr " + appSettings["CBR"]},
                     {"3", " --vbr " + appSettings["VBR"]}
                 };
-                argLine = argLine + bitWith[appSettings["Code_rate_control_mode_selection"]];
+                argLine += bitWith[appSettings["Code_rate_control_mode_selection"]];
             }
             catch (Exception exception)
             {
@@ -243,12 +193,12 @@ namespace StarTools
             }
 
             if (uiCheckBox1.Checked)
-                argLine = argLine + " --interlace tff --vpp-deinterlace normal";
+                argLine += " --interlace tff --vpp-deinterlace normal";
 
             if (uiCheckBox2.Checked)
                 argLine = argLine + " --output-res " + WBox.Text + "x" + HBox.Text;
 
-            if (appSettings["Code"] != null && appSettings["Code"] != "") argLine = argLine + appSettings["Code"];
+            if (appSettings["Code"] != null && appSettings["Code"] != "") argLine += appSettings["Code"];
 
             argLine = argLine + " -o \"" + OutputFile.Text + "\"";
 

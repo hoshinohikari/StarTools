@@ -55,25 +55,24 @@ namespace StarTools
                 cmd.uiRichTextBox1.ScrollToCaret();
                 try
                 {
-                    if (log.Length > 11)
+                    if (log.Length <= 11) return;
+                    if (log.Substring(0, 11) == "encode time")
                     {
-                        if (log.Substring(0, 11) == "encode time")
+                        cmd.uiProcessBar1.Value = 100;
+                    }
+                    else
+                    {
+                        switch (_exe)
                         {
-                            cmd.uiProcessBar1.Value = 100;
-                        }
-                        else
-                        {
-                            if (_exe == "enc")
-                            {
+                            case "enc":
                                 cmd.uiProcessBar1.Value = (int) float.Parse(log.Substring(
                                     log.IndexOf("[", StringComparison.Ordinal) + 1,
                                     log.IndexOf("%", StringComparison.Ordinal) -
                                     log.IndexOf("[", StringComparison.Ordinal) - 1));
-                            }
-                            else if (_exe == "ffmpe")
-                            {
+                                break;
+                            case "ffmpe":
                                 //TODO: ffmpeg管道模式下的进度条实现
-                            }
+                                break;
                         }
                     }
                 }

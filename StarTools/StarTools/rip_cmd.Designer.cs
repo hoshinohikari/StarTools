@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RipCmd));
             this.uiProcessBar1 = new Sunny.UI.UIProcessBar();
             this.uiRichTextBox1 = new Sunny.UI.UIRichTextBox();
             this.PagePanel.SuspendLayout();
@@ -67,6 +68,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 305);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RipCmd";
             this.Text = "rip_cmd";
             this.PagePanel.ResumeLayout(false);

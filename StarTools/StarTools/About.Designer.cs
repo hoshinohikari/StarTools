@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
             this.uiRichTextBox1 = new Sunny.UI.UIRichTextBox();
             this.uiLine1 = new Sunny.UI.UILine();
             this.PagePanel.SuspendLayout();
@@ -50,10 +51,9 @@
             this.uiRichTextBox1.Padding = new System.Windows.Forms.Padding(2);
             this.uiRichTextBox1.Size = new System.Drawing.Size(632, 320);
             this.uiRichTextBox1.TabIndex = 0;
-            this.uiRichTextBox1.Text =
-                "这是一个基于ffmpeg与显卡压制工具们的GUI操作工具\n" + "用于压制某些不需要精细处理的片源\n" + "依赖管理可完全由自己定义，只需独立的GUI文件即可运行\n" +
-                "GUI框架基于SunnyGUI\n" + "基础使用教学: https://www.346pro.club \n" +
-                "Github: https://github.com/hoshinohikari/StarTools ";
+            this.uiRichTextBox1.Text = "这是一个基于ffmpeg与显卡压制工具们的GUI操作工具\n用于压制某些不需要精细处理的片源\n依赖管理可完全由自己定义，只需独立的GUI文件即可运行\nGUI框架基于" +
+    "SunnyGUI\n基础使用教学: https://www.346pro.club \nGithub: https://github.com/hoshinohika" +
+    "ri/StarTools ";
             // 
             // uiLine1
             // 
@@ -70,6 +70,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(658, 413);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "About";
             this.Text = "About";
             this.PagePanel.ResumeLayout(false);

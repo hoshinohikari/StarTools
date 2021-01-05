@@ -104,16 +104,16 @@ namespace StarTools
                 Title = @"Open video file"
             };
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                try
-                {
-                    ffmpeg_file.Text = openFileDialog1.FileName;
-                }
-                catch (SecurityException ex)
-                {
-                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                                    $"Details:\n\n{ex.StackTrace}");
-                }
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+            try
+            {
+                ffmpeg_file.Text = openFileDialog1.FileName;
+            }
+            catch (SecurityException ex)
+            {
+                MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
+                                $"Details:\n\n{ex.StackTrace}");
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -125,16 +125,16 @@ namespace StarTools
                 Title = @"Open video file"
             };
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                try
-                {
-                    NVEnc_file.Text = openFileDialog1.FileName;
-                }
-                catch (SecurityException ex)
-                {
-                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                                    $"Details:\n\n{ex.StackTrace}");
-                }
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+            try
+            {
+                NVEnc_file.Text = openFileDialog1.FileName;
+            }
+            catch (SecurityException ex)
+            {
+                MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
+                                $"Details:\n\n{ex.StackTrace}");
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -146,16 +146,16 @@ namespace StarTools
                 Title = @"Open video file"
             };
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                try
-                {
-                    QSVEnc_file.Text = openFileDialog1.FileName;
-                }
-                catch (SecurityException ex)
-                {
-                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                                    $"Details:\n\n{ex.StackTrace}");
-                }
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+            try
+            {
+                QSVEnc_file.Text = openFileDialog1.FileName;
+            }
+            catch (SecurityException ex)
+            {
+                MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
+                                $"Details:\n\n{ex.StackTrace}");
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -167,16 +167,16 @@ namespace StarTools
                 Title = @"Open video file"
             };
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                try
-                {
-                    VCEEnc_file.Text = openFileDialog1.FileName;
-                }
-                catch (SecurityException ex)
-                {
-                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                                    $"Details:\n\n{ex.StackTrace}");
-                }
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+            try
+            {
+                VCEEnc_file.Text = openFileDialog1.FileName;
+            }
+            catch (SecurityException ex)
+            {
+                MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
+                                $"Details:\n\n{ex.StackTrace}");
+            }
         }
 
         private void file_DragEnter(object sender, DragEventArgs e)

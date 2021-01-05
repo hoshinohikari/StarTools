@@ -99,6 +99,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileDo.cs" />
     <Compile Include="CmdUtils.cs" />
     <Compile Include="ffmpeg_demux.cs">
       <SubType>Form</SubType>
