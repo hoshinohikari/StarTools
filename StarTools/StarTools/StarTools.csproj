@@ -125,6 +125,7 @@
     <Compile Include="needed.Designer.cs">
       <DependentUpon>needed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Page.cs" />
     <Compile Include="rip_cmd.cs">
       <SubType>Form</SubType>
     </Compile>

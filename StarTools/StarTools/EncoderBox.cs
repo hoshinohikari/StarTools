@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using System.Windows.Forms;
 using Sunny.UI;
 
 namespace StarTools
@@ -53,7 +52,7 @@ namespace StarTools
                         uiRadioButton1.Checked = true;
                         break;
                     default:
-                        this.ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
+                        ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
                         break;
                 }
 
@@ -79,7 +78,7 @@ namespace StarTools
                             uiLabel7.Hide();
                             break;
                         default:
-                            this.ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
+                            ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
                             break;
                     }
                 }
@@ -159,7 +158,7 @@ namespace StarTools
             else if (!uiRadioButton1.Checked && !uiRadioButton2.Checked && uiRadioButton3.Checked)
                 AddUpdateAppSettings("Code_rate_control_mode_selection", "3");
             else
-                this.ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
+                ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
 
             AddUpdateAppSettings("I", IBox.Text);
             AddUpdateAppSettings("P", PBox.Text);
@@ -188,7 +187,7 @@ namespace StarTools
                     uiLabel7.Hide();
                     break;
                 default:
-                    this.ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
+                    ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
                     break;
             }
         }

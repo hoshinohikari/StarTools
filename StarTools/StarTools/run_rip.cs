@@ -26,7 +26,7 @@ namespace StarTools
         {
             if (MainTabControl.TabPages[0].Controls[0] is RipCmd r && r.uiProcessBar1.Value != 100)
             {
-                if (this.ShowAskDialog("转换未完成，确认要退出吗"))
+                if (ShowAskDialog("转换未完成，确认要退出吗"))
                     RipCmd.StopCmd();
                 else
                     e.Cancel = true;

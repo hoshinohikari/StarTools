@@ -141,15 +141,21 @@ namespace StarTools
         {
             if (OutputFile.Text == "")
             {
-                this.ShowErrorDialog(@"请填写输出文件!");
+                ShowErrorDialog(@"请填写输出文件!");
                 return;
             }
 
             var appSettings = ConfigurationManager.AppSettings;
             var cmdLine = appSettings["MP4Box_file"] + " -add \"" + VideoFile.Text + "\"";
-            cmdLine = AudioList.Items.Cast<object>().Aggregate(cmdLine, (current, i) => current + (" -add \"" + i + "\""));
+            cmdLine = AudioList.Items.Cast<object>()
+                .Aggregate(cmdLine, (current, i) => current + " -add \"" + i + "\"");
             cmdLine += " -new \"" + OutputFile.Text + "\"";
-            File.Delete(OutputFile.Text);
+            if (File.Exists(OutputFile.Text))
+                if (Page.ShowAskDialog("文件已存在，确认覆盖？"))
+                    File.Delete(OutputFile.Text);
+                else
+                    return;
+
             var p = new Process
             {
                 StartInfo =
@@ -172,7 +178,7 @@ namespace StarTools
             var tem = "";
             if (mkvOutputFile.Text == "")
             {
-                this.ShowErrorDialog(@"请填写输出文件!");
+                ShowErrorDialog(@"请填写输出文件!");
                 return;
             }
 
@@ -186,8 +192,14 @@ namespace StarTools
                     i.ToString().LastIndexOf('.') - i.ToString().LastIndexOf('\\') - 1);
                 cmdLine += " --track-name 0:\"" + tem + "\" \"" + i + "\"";
             }
-            cmdLine = mkvOthersList.Items.Cast<object>().Aggregate(cmdLine, (current, i) => current + (" --attach-file \"" + i + "\""));
-            File.Delete(mkvOutputFile.Text);
+
+            cmdLine = mkvOthersList.Items.Cast<object>()
+                .Aggregate(cmdLine, (current, i) => current + " --attach-file \"" + i + "\"");
+            if (File.Exists(mkvOutputFile.Text))
+                if (Page.ShowAskDialog("文件已存在，确认覆盖？"))
+                    File.Delete(mkvOutputFile.Text);
+                else
+                    return;
             var p = new Process
             {
                 StartInfo =

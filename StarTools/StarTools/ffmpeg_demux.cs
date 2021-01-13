@@ -76,7 +76,11 @@ namespace StarTools
         private void demux_Click(object sender, EventArgs e)
         {
             var appSettings = ConfigurationManager.AppSettings;
-            File.Delete(OutputFile.Text);
+            if (File.Exists(OutputFile.Text))
+                if (Page.ShowAskDialog("文件已存在，确认覆盖？"))
+                    File.Delete(OutputFile.Text);
+                else
+                    return;
             var p = new Process
             {
                 StartInfo =

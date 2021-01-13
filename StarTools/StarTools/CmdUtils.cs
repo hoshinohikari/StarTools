@@ -57,11 +57,8 @@ namespace StarTools
                 {
                     if (log.Length <= 11) return;
                     if (log.Substring(0, 11) == "encode time")
-                    {
                         cmd.uiProcessBar1.Value = 100;
-                    }
                     else
-                    {
                         switch (_exe)
                         {
                             case "enc":
@@ -74,7 +71,6 @@ namespace StarTools
                                 //TODO: ffmpeg管道模式下的进度条实现
                                 break;
                         }
-                    }
                 }
                 catch
                 {

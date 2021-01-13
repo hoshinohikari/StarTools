@@ -122,13 +122,13 @@ namespace StarTools
 
             if (VideoFile.Text == @"请输入视频文件")
             {
-                this.ShowErrorDialog(@"请放入源文件!");
+                ShowErrorDialog(@"请放入源文件!");
                 return;
             }
 
             if (OutputFile.Text == "")
             {
-                this.ShowErrorDialog(@"请填写输出文件!");
+                ShowErrorDialog(@"请填写输出文件!");
                 return;
             }
 

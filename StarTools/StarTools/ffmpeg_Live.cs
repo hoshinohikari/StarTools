@@ -59,7 +59,7 @@ namespace StarTools
                             uiLabel7.Hide();
                             break;
                         default:
-                            this.ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
+                            ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
                             break;
                     }
                 }
@@ -97,7 +97,7 @@ namespace StarTools
                     uiLabel7.Hide();
                     break;
                 default:
-                    this.ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
+                    ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
                     break;
             }
         }
@@ -127,19 +127,19 @@ namespace StarTools
             var appSettings = ConfigurationManager.AppSettings;
             if (VideoFile.Text == @"请输入视频文件")
             {
-                this.ShowErrorDialog(@"请放入源文件!");
+                ShowErrorDialog(@"请放入源文件!");
                 return;
             }
 
             if (RTMP.Text == "")
             {
-                this.ShowErrorDialog(@"请输入RTMP地址!");
+                ShowErrorDialog(@"请输入RTMP地址!");
                 return;
             }
 
             if (LiveCode.Text == "")
             {
-                this.ShowErrorDialog(@"请输入直播码!");
+                ShowErrorDialog(@"请输入直播码!");
                 return;
             }
 
@@ -173,7 +173,7 @@ namespace StarTools
                                               "\"");
                     break;
                 default:
-                    this.ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
+                    ShowErrorDialog(@"正常情况看不到这个，出现该弹窗请带上复现方法到GitHub提issue");
                     break;
             }
         }
